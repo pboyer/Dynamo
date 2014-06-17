@@ -5,11 +5,8 @@ using System.Reflection;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Dynamo.Applications;
-using Dynamo.Interfaces;
 using Dynamo.Utilities;
-using Dynamo.ViewModels;
 using DynamoUnits;
-using Dynamo.UpdateManager;
 using NUnit.Framework;
 using ProtoCore.Mirror;
 using RevitServices.Elements;
@@ -50,15 +47,15 @@ namespace Dynamo.Tests
             //get the test path
             var fi = new FileInfo(Assembly.GetExecutingAssembly().Location);
             string assDir = fi.DirectoryName;
-            string testsLoc = Path.Combine(assDir, @"..\..\..\test\System\revit\");
+            string testsLoc = Path.Combine(assDir, @"..\..\..\..\test\System\revit\");
             _testPath = Path.GetFullPath(testsLoc);
 
             //get the samples path
-            string samplesLoc = Path.Combine(assDir, @"..\..\..\doc\distrib\Samples\");
+            string samplesLoc = Path.Combine(assDir, @"..\..\..\..\doc\distrib\Samples\");
             _samplesPath = Path.GetFullPath(samplesLoc);
 
             //set the custom node loader search path
-            string defsLoc = Path.Combine(assDir, @".\dynamo_packages\Dynamo Sample Custom Nodes\dyf\");
+            string defsLoc = Path.Combine(assDir, @"..\dynamo_packages\Dynamo Sample Custom Nodes\dyf\");
             _defsPath = Path.GetFullPath(defsLoc);
 
             _emptyModelPath = Path.Combine(_testPath, "empty.rfa");
@@ -140,10 +137,17 @@ namespace Dynamo.Tests
                 var p1 = new Plane(XYZ.BasisZ, XYZ.Zero);
                 var p2 = new Plane(XYZ.BasisZ, new XYZ(0, 0, 5));
 
-                SketchPlane sp1 = DocumentManager.Instance.CurrentUIDocument.Document.FamilyCreate.NewSketchPlane(p1);
-                SketchPlane sp2 = DocumentManager.Instance.CurrentUIDocument.Document.FamilyCreate.NewSketchPlane(p2);
-                Curve c1 = DocumentManager.Instance.CurrentUIApplication.Application.Create.NewLineBound(XYZ.Zero, new XYZ(1, 0, 0));
-                Curve c2 = DocumentManager.Instance.CurrentUIApplication.Application.Create.NewLineBound(new XYZ(0, 0, 5), new XYZ(1, 0, 5));
+                //TODO" 2014->2015
+                //SketchPlane sp1 = DocumentManager.Instance.CurrentUIDocument.Document.FamilyCreate.NewSketchPlane(p1);
+                //SketchPlane sp2 = DocumentManager.Instance.CurrentUIDocument.Document.FamilyCreate.NewSketchPlane(p2);
+                //Curve c1 = DocumentManager.Instance.CurrentUIApplication.Application.Create.NewLineBound(XYZ.Zero, new XYZ(1, 0, 0));
+                //Curve c2 = DocumentManager.Instance.CurrentUIApplication.Application.Create.NewLineBound(new XYZ(0, 0, 5), new XYZ(1, 0, 5));
+
+                var sp1 = Autodesk.Revit.DB.SketchPlane.Create(DocumentManager.Instance.CurrentDBDocument, p1);
+                var sp2 = Autodesk.Revit.DB.SketchPlane.Create(DocumentManager.Instance.CurrentDBDocument, p2);
+                var c1 = Autodesk.Revit.DB.Line.CreateBound(XYZ.Zero, new XYZ(1, 0, 0));
+                var c2 = Autodesk.Revit.DB.Line.CreateBound(new XYZ(0, 0, 5), new XYZ(1, 0, 5));
+
                 mc1 = DocumentManager.Instance.CurrentUIDocument.Document.FamilyCreate.NewModelCurve(c1, sp1);
                 mc2 = DocumentManager.Instance.CurrentUIDocument.Document.FamilyCreate.NewModelCurve(c2, sp2);
 
@@ -164,8 +168,13 @@ namespace Dynamo.Tests
 
                 var p1 = new Plane(XYZ.BasisZ, XYZ.Zero);
 
-                SketchPlane sp1 = DocumentManager.Instance.CurrentUIDocument.Document.FamilyCreate.NewSketchPlane(p1);
-                Curve c1 = DocumentManager.Instance.CurrentUIApplication.Application.Create.NewLineBound(XYZ.Zero, new XYZ(1, 0, 0));
+                //TODO: 2014->2015
+                //SketchPlane sp1 = DocumentManager.Instance.CurrentUIDocument.Document.FamilyCreate.NewSketchPlane(p1);
+                //Curve c1 = DocumentManager.Instance.CurrentUIApplication.Application.Create.NewLineBound(XYZ.Zero, new XYZ(1, 0, 0));
+
+                SketchPlane sp1 = Autodesk.Revit.DB.SketchPlane.Create(DocumentManager.Instance.CurrentDBDocument, p1);
+                Curve c1 = Autodesk.Revit.DB.Line.CreateBound(XYZ.Zero, new XYZ(1, 0, 0));
+
                 mc1 = DocumentManager.Instance.CurrentUIDocument.Document.FamilyCreate.NewModelCurve(c1, sp1);
 
                 _trans.Commit();
