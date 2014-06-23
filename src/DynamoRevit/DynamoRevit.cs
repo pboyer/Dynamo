@@ -105,7 +105,7 @@ namespace Dynamo.Applications
 
             // Add the Revit_20xx folder for assembly resolution
             DynamoPaths.AddResolutionPath(assDir);
-            
+
             // Setup the core paths
             DynamoPaths.SetupDynamoPathsCore(Path.GetFullPath(assDir + @"\.."));
 
