@@ -7,7 +7,6 @@ using System.Windows.Input;
 using Dynamo.Models;
 using Dynamo.Selection;
 using Dynamo.Utilities;
-using DynCmd = Dynamo.ViewModels.DynamoViewModel;
 using Dynamo.Core;
 using Dynamo.UI;
 
@@ -647,8 +646,8 @@ namespace Dynamo.ViewModels
                 else if (this.currentState == State.NodeReposition)
                 {
                     Point mouseCursor = e.GetPosition(sender as IInputElement);
-                    var operation = DynCmd.DragSelectionCommand.Operation.EndDrag;
-                    var command = new DynCmd.DragSelectionCommand(mouseCursor, operation);
+                    var operation = DragSelectionCommand.Operation.EndDrag;
+                    var command = new DragSelectionCommand(mouseCursor, operation);
 
                     owningWorkspace.DynamoViewModel.ExecuteCommand(command);
 
@@ -703,7 +702,7 @@ namespace Dynamo.ViewModels
 
                     var rect = new Rect(x, y, width, height);
 
-                    var command = new DynCmd.SelectInRegionCommand(rect, isCrossSelection);
+                    var command = new SelectInRegionCommand(rect, isCrossSelection);
 
                     owningWorkspace.DynamoViewModel.ExecuteCommand(command);
 
@@ -718,8 +717,8 @@ namespace Dynamo.ViewModels
                     }
 
                     // Record and begin the drag operation for selected nodes.
-                    var operation = DynCmd.DragSelectionCommand.Operation.BeginDrag;
-                    var command = new DynCmd.DragSelectionCommand(mouseCursor, operation);
+                    var operation = DragSelectionCommand.Operation.BeginDrag;
+                    var command = new DragSelectionCommand(mouseCursor, operation);
                     owningWorkspace.DynamoViewModel.ExecuteCommand(command);
 
                     SetCurrentState(State.NodeReposition);
@@ -764,8 +763,8 @@ namespace Dynamo.ViewModels
                     Guid nodeId = portModel.Owner.GUID;
                     int portIndex = portModel.Owner.GetPortIndexAndType(portModel, out portType);
 
-                    owningWorkspace.DynamoViewModel.ExecuteCommand(new DynCmd.MakeConnectionCommand(
-                        nodeId, portIndex, portType, DynCmd.MakeConnectionCommand.Mode.Begin));
+                    owningWorkspace.DynamoViewModel.ExecuteCommand(new MakeConnectionCommand(
+                        nodeId, portIndex, portType, MakeConnectionCommand.Mode.Begin));
 
                     if (null != owningWorkspace.activeConnector)
                     {
@@ -783,8 +782,8 @@ namespace Dynamo.ViewModels
                         Guid nodeId = portModel.Owner.GUID;
                         int portIndex = portModel.Owner.GetPortIndexAndType(portModel, out portType);
 
-                        owningWorkspace.DynamoViewModel.ExecuteCommand(new DynCmd.MakeConnectionCommand(
-                            nodeId, portIndex, portType, DynCmd.MakeConnectionCommand.Mode.End));
+                        owningWorkspace.DynamoViewModel.ExecuteCommand(new MakeConnectionCommand(
+                            nodeId, portIndex, portType, MakeConnectionCommand.Mode.End));
 
                         owningWorkspace.CurrentCursor = null;
                         owningWorkspace.IsCursorForced = false;
@@ -801,8 +800,8 @@ namespace Dynamo.ViewModels
 
             private void CancelConnection()
             {
-                var command = new DynCmd.MakeConnectionCommand(Guid.Empty, -1,
-                        PortType.INPUT, DynCmd.MakeConnectionCommand.Mode.Cancel);
+                var command = new MakeConnectionCommand(Guid.Empty, -1,
+                        PortType.INPUT, MakeConnectionCommand.Mode.Cancel);
 
                 owningWorkspace.DynamoViewModel.ExecuteCommand(command);
             }
@@ -854,7 +853,7 @@ namespace Dynamo.ViewModels
                     throw new InvalidOperationException();
 
                 // Clear existing selection set.
-                var selectNothing = new DynCmd.SelectModelCommand(Guid.Empty, ModifierKeys.None);
+                var selectNothing = new SelectModelCommand(Guid.Empty, ModifierKeys.None);
 
                 owningWorkspace.DynamoViewModel.ExecuteCommand(selectNothing);
 
@@ -874,7 +873,7 @@ namespace Dynamo.ViewModels
                 // create node
                 var guid = Guid.NewGuid();
 
-                owningWorkspace.DynamoViewModel.ExecuteCommand(new DynCmd.CreateNodeCommand(guid,
+                owningWorkspace.DynamoViewModel.ExecuteCommand(new CreateNodeCommand(guid,
                     "Code Block", cursor.X, cursor.Y, false, true));
 
                 // select node

@@ -38,8 +38,8 @@ namespace Dynamo.TestInfrastructure
 
             DynamoViewModel.UIDispatcher.Invoke(new Action(() =>
             {
-                DynamoViewModel.UpdateModelValueCommand updateValue =
-                    new DynamoViewModel.UpdateModelValueCommand(node.GUID, "Value", assemblyPath);
+                UpdateModelValueCommand updateValue =
+                    new UpdateModelValueCommand(node.GUID, "Value", assemblyPath);
 
                 DynamoViewModel.ExecuteCommand(updateValue);
             }));

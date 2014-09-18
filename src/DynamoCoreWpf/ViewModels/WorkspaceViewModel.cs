@@ -454,7 +454,7 @@ namespace Dynamo.ViewModels
             }
 
             Guid nodeID = Guid.NewGuid();
-            var command = new DynamoViewModel.ConvertNodesToCodeCommand(nodeID);
+            var command = new ConvertNodesToCodeCommand(nodeID);
             this.DynamoViewModel.ExecuteCommand(command);
         }
 

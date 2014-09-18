@@ -220,7 +220,7 @@ namespace Dynamo.Nodes
                     {
                         string propName = expr.ParentBinding.Path.Path;
                         nvm.DynamoViewModel.ExecuteCommand(
-                            new DynCmd.UpdateModelValueCommand(
+                            new UpdateModelValueCommand(
                                 nvm.NodeModel.GUID, propName, this.Text));
                     }
                 }

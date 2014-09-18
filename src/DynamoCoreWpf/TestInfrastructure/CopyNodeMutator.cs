@@ -30,8 +30,8 @@ namespace Dynamo.TestInfrastructure
 
             DynamoViewModel.UIDispatcher.Invoke(new Action(() =>
             {
-                DynamoViewModel.SelectModelCommand selectNodeCommand =
-                    new DynamoViewModel.SelectModelCommand(node.GUID, ModifierKeys.None);
+                SelectModelCommand selectNodeCommand =
+                    new SelectModelCommand(node.GUID, ModifierKeys.None);
 
                 DynamoViewModel.ExecuteCommand(selectNodeCommand);
 

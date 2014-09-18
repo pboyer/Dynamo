@@ -56,7 +56,7 @@ namespace Dynamo.UI.Prompts
                 string propName = expr.ParentBinding.Path.Path;
 
                 ele.dynamoViewModel.ExecuteCommand(
-                    new DynCmd.UpdateModelValueCommand(
+                    new UpdateModelValueCommand(
                         model.GUID, propName, editText.Text));
             }
 

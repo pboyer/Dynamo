@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Threading;
 using System.Xml;
 using Dynamo.Utilities;
-using DynCmd = Dynamo.ViewModels.DynamoViewModel;
+using Dynamo.Models;
 
 namespace Dynamo.ViewModels
 {
@@ -74,8 +74,8 @@ namespace Dynamo.ViewModels
         private System.Windows.Window mainWindow = null;
         private DynamoViewModel owningViewModel = null;
         private DispatcherTimer playbackTimer = null;
-        private List<DynCmd.RecordableCommand> loadedCommands = null;
-        private List<DynCmd.RecordableCommand> recordedCommands = null;
+        private List<RecordableCommand> loadedCommands = null;
+        private List<RecordableCommand> recordedCommands = null;
 
         #endregion
 
@@ -94,8 +94,8 @@ namespace Dynamo.ViewModels
         internal State CurrentState { get; private set; }
         internal Exception PlaybackException { get; private set; }
 
-        internal DynCmd.RecordableCommand PreviousCommand { get; private set; }
-        internal DynCmd.RecordableCommand CurrentCommand { get; private set; }
+        internal RecordableCommand PreviousCommand { get; private set; }
+        internal RecordableCommand CurrentCommand { get; private set; }
 
         internal bool IsInPlaybackMode
         {
@@ -136,7 +136,7 @@ namespace Dynamo.ViewModels
             else
             {
                 ChangeStateInternal(State.Recording);
-                recordedCommands = new List<DynCmd.RecordableCommand>();
+                recordedCommands = new List<RecordableCommand>();
             }
 
             this.owningViewModel = vm;
@@ -170,7 +170,7 @@ namespace Dynamo.ViewModels
             ChangeStateInternal(State.Playing);
         }
 
-        internal void RecordCommand(DynCmd.RecordableCommand command)
+        internal void RecordCommand(RecordableCommand command)
         {
             // In the playback mode 'this.recordedCommands' will be 
             // 'null' so that the incoming command will not be recorded.
@@ -210,7 +210,7 @@ namespace Dynamo.ViewModels
             helper.SetAttribute(PauseAttribName, PauseAfterPlayback);
             helper.SetAttribute(IntervalAttribName, CommandInterval);
 
-            foreach (DynCmd.RecordableCommand command in recordedCommands)
+            foreach (RecordableCommand command in recordedCommands)
                 commandRoot.AppendChild(command.Serialize(document));
 
             string format = "Commands-{0:yyyyMMdd-hhmmss}.xml";
@@ -230,7 +230,7 @@ namespace Dynamo.ViewModels
                 throw new InvalidOperationException(message);
             }
 
-            var pausePlaybackCommand = new DynCmd.PausePlaybackCommand(20);
+            var pausePlaybackCommand = new PausePlaybackCommand(20);
             this.RecordCommand(pausePlaybackCommand);
             return pausePlaybackCommand.Tag;
         }
@@ -269,11 +269,11 @@ namespace Dynamo.ViewModels
                 this.PauseAfterPlayback = helper.ReadInteger(PauseAttribName, 10);
                 this.CommandInterval = helper.ReadInteger(IntervalAttribName, 20);
 
-                loadedCommands = new List<DynCmd.RecordableCommand>();
+                loadedCommands = new List<RecordableCommand>();
                 foreach (XmlNode node in commandRoot.ChildNodes)
                 {
-                    DynCmd.RecordableCommand command = null;
-                    command = DynCmd.RecordableCommand.Deserialize(node as XmlElement);
+                    RecordableCommand command = null;
+                    command = RecordableCommand.Deserialize(node as XmlElement);
                     if (null != command)
                         loadedCommands.Add(command);
                 }
@@ -345,16 +345,16 @@ namespace Dynamo.ViewModels
             }
 
             // Remove the first command from the loaded commands.
-            DynCmd.RecordableCommand nextCommand = loadedCommands[0];
+            RecordableCommand nextCommand = loadedCommands[0];
             loadedCommands.RemoveAt(0);
 
             // Update the cached command references.
             this.PreviousCommand = this.CurrentCommand;
             this.CurrentCommand = nextCommand;
 
-            if (nextCommand is DynCmd.PausePlaybackCommand)
+            if (nextCommand is PausePlaybackCommand)
             {
-                var command = nextCommand as DynCmd.PausePlaybackCommand;
+                var command = nextCommand as PausePlaybackCommand;
                 PauseCommandPlayback(command.PauseDurationInMs);
                 return;
             }
@@ -366,7 +366,7 @@ namespace Dynamo.ViewModels
                 // before the command execution starts. After the command is done,
                 // the timer is then resumed for the next command in queue.
                 // 
-                nextCommand.Execute(this.owningViewModel);
+                this.owningViewModel.ExecuteCommand(nextCommand, true);
             }
             catch (Exception exception)
             {
