@@ -443,7 +443,7 @@ namespace Dynamo.ViewModels
             // create node
             var guid = Guid.NewGuid();
             this.dynamoViewModel.ExecuteCommand(
-                new DynamoViewModel.CreateNodeCommand(guid, element.FunctionDescriptor.MangledName, 0, 0, true, true));
+                new CreateNodeCommand(guid, element.FunctionDescriptor.MangledName, 0, 0, true, true));
 
             // select node
             var placedNode = dynamoViewModel.Model.Nodes.Find((node) => node.GUID == guid);
@@ -461,7 +461,7 @@ namespace Dynamo.ViewModels
             // create node
             var guid = Guid.NewGuid();
             dynamoViewModel.ExecuteCommand(
-                new DynamoViewModel.CreateNodeCommand(guid, name, 0, 0, true, true));
+                new CreateNodeCommand(guid, name, 0, 0, true, true));
 
             // select node
             var placedNode = dynamoViewModel.Model.Nodes.Find((node) => node.GUID == guid);
@@ -477,7 +477,7 @@ namespace Dynamo.ViewModels
             // create node
             var guid = Guid.NewGuid();
             dynamoViewModel.ExecuteCommand(
-                new DynamoViewModel.CreateNodeCommand(guid, element.FullName, 0, 0, true, true));
+                new CreateNodeCommand(guid, element.FullName, 0, 0, true, true));
 
             // select node
             var placedNode = dynamoViewModel.Model.Nodes.Find((node) => node.GUID == guid);

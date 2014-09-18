@@ -27,7 +27,6 @@ using DynamoUnits;
 
 using DynamoUtilities;
 
-using DynCmd = Dynamo.ViewModels.DynamoViewModel;
 using System.Reflection;
 
 namespace Dynamo.ViewModels
@@ -606,7 +605,7 @@ namespace Dynamo.ViewModels
 
         public void CancelRunCmd(object parameter)
         {
-            var command = new DynamoViewModel.RunCancelCommand(false, true);
+            var command = new RunCancelCommand(false, true);
             this.ExecuteCommand(command);
         }
 
@@ -623,7 +622,7 @@ namespace Dynamo.ViewModels
         internal void RunExprCmd(object parameters)
         {
             bool displayErrors = Convert.ToBoolean(parameters);
-            var command = new DynamoViewModel.RunCancelCommand(displayErrors, false);
+            var command = new RunCancelCommand(displayErrors, false);
             this.ExecuteCommand(command);
         }
 
@@ -635,13 +634,13 @@ namespace Dynamo.ViewModels
         internal void ForceRunExprCmd(object parameters)
         {
             bool displayErrors = Convert.ToBoolean(parameters);
-            var command = new DynamoViewModel.ForceRunCancelCommand(displayErrors, false);
+            var command = new ForceRunCancelCommand(displayErrors, false);
             this.ExecuteCommand(command);
         }
 
         internal void MutateTestCmd(object parameters)
         {
-            var command = new DynamoViewModel.MutateTestCommand();
+            var command = new MutateTestCommand();
             this.ExecuteCommand(command);
         }
 
@@ -801,7 +800,7 @@ namespace Dynamo.ViewModels
                 throw new ArgumentException(message, "parameters");
             }
 
-            var command = new DynCmd.CreateNoteCommand(Guid.NewGuid(), null, 0, 0, true);
+            var command = new CreateNoteCommand(Guid.NewGuid(), null, 0, 0, true);
             this.ExecuteCommand(command);
         }
 
@@ -1506,7 +1505,7 @@ namespace Dynamo.ViewModels
                 throw new ArgumentException(message, "parameters");
             }
 
-            var command = new DynCmd.DeleteModelCommand(Guid.Empty);
+            var command = new DeleteModelCommand(Guid.Empty);
             this.ExecuteCommand(command);
         }
 

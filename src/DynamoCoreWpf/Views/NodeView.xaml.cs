@@ -331,7 +331,7 @@ namespace Dynamo.Controls
             {
                 Guid nodeGuid = this.ViewModel.NodeModel.GUID;
                 this.ViewModel.DynamoViewModel.ExecuteCommand(
-                    new DynCmd.SelectModelCommand(nodeGuid, Keyboard.Modifiers));
+                    new SelectModelCommand(nodeGuid, Keyboard.Modifiers));
             }
             if (e.ClickCount == 2)
             {

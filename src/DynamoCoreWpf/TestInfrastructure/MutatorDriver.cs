@@ -102,8 +102,8 @@ namespace Dynamo.TestInfrastructure
 
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
                         dynamoViewModel.ExecuteCommand(runCancel);
 
                     }));
@@ -142,8 +142,8 @@ namespace Dynamo.TestInfrastructure
 
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
                         dynamoViewModel.ExecuteCommand(runCancel);
 
                     }));
@@ -162,9 +162,9 @@ namespace Dynamo.TestInfrastructure
                         {
                             dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                             {
-                                DynamoViewModel.UndoRedoCommand undoCommand =
-                                    new DynamoViewModel.UndoRedoCommand(
-                                        DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                                UndoRedoCommand undoCommand =
+                                    new UndoRedoCommand(
+                                        UndoRedoCommand.Operation.Undo);
                                 dynamoViewModel.ExecuteCommand(undoCommand);
 
                             }));
@@ -178,8 +178,8 @@ namespace Dynamo.TestInfrastructure
 
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.RunCancelCommand runCancel =
-                                new DynamoViewModel.RunCancelCommand(false, false);
+                            RunCancelCommand runCancel =
+                                new RunCancelCommand(false, false);
 
                             dynamoViewModel.ExecuteCommand(runCancel);
 
@@ -235,8 +235,8 @@ namespace Dynamo.TestInfrastructure
                     writer.WriteLine("### - Beginning eval");
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
                         dynamoViewModel.ExecuteCommand(runCancel);
                     }));
                     while (dynamoViewModel.Model.Runner.Running)
@@ -261,8 +261,8 @@ namespace Dynamo.TestInfrastructure
                     {
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.UndoRedoCommand undoCommand =
-                                new DynamoViewModel.UndoRedoCommand(DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                            UndoRedoCommand undoCommand =
+                                new UndoRedoCommand(UndoRedoCommand.Operation.Undo);
                             dynamoViewModel.ExecuteCommand(undoCommand);
 
                         }));
@@ -273,8 +273,8 @@ namespace Dynamo.TestInfrastructure
 
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
                         dynamoViewModel.ExecuteCommand(runCancel);
                     }));
                     while (dynamoViewModel.Model.Runner.Running)
@@ -352,8 +352,8 @@ namespace Dynamo.TestInfrastructure
 
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
                         dynamoViewModel.ExecuteCommand(runCancel);
 
                     }));
@@ -411,8 +411,8 @@ namespace Dynamo.TestInfrastructure
 
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
                         dynamoViewModel.ExecuteCommand(runCancel);
 
                     }));
@@ -428,9 +428,9 @@ namespace Dynamo.TestInfrastructure
                     {
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.UndoRedoCommand undoCommand =
-                                new DynamoViewModel.UndoRedoCommand(
-                                    DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                            UndoRedoCommand undoCommand =
+                                new UndoRedoCommand(
+                                    UndoRedoCommand.Operation.Undo);
                             dynamoViewModel.ExecuteCommand(undoCommand);
 
                         }));
@@ -446,8 +446,8 @@ namespace Dynamo.TestInfrastructure
 
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
 
                         dynamoViewModel.ExecuteCommand(runCancel);
 
@@ -546,8 +546,8 @@ namespace Dynamo.TestInfrastructure
 
                             dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                             {
-                                DynamoViewModel.DeleteModelCommand delCommand =
-                                    new DynamoViewModel.DeleteModelCommand(node.GUID);
+                                DeleteModelCommand delCommand =
+                                    new DeleteModelCommand(node.GUID);
 
                                 dynamoViewModel.ExecuteCommand(delCommand);
 
@@ -560,9 +560,9 @@ namespace Dynamo.TestInfrastructure
 
                             dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                             {
-                                DynamoViewModel.UndoRedoCommand undoCommand =
-                                    new DynamoViewModel.UndoRedoCommand(
-                                        DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                                UndoRedoCommand undoCommand =
+                                    new UndoRedoCommand(
+                                        UndoRedoCommand.Operation.Undo);
                                 dynamoViewModel.ExecuteCommand(undoCommand);
 
                             }));
@@ -613,8 +613,8 @@ namespace Dynamo.TestInfrastructure
                         writer.WriteLine("### - Beginning eval");
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.RunCancelCommand runCancel =
-                                new DynamoViewModel.RunCancelCommand(false, false);
+                            RunCancelCommand runCancel =
+                                new RunCancelCommand(false, false);
                             dynamoViewModel.ExecuteCommand(runCancel);
                         }));
                         while (dynamoViewModel.Model.Runner.Running)
@@ -651,9 +651,9 @@ namespace Dynamo.TestInfrastructure
                         {
                             dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                             {
-                                DynamoViewModel.UndoRedoCommand undoCommand =
-                                    new DynamoViewModel.UndoRedoCommand(
-                                        DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                                UndoRedoCommand undoCommand =
+                                    new UndoRedoCommand(
+                                        UndoRedoCommand.Operation.Undo);
                                 dynamoViewModel.ExecuteCommand(undoCommand);
                             }));
                             Thread.Sleep(100);
@@ -664,8 +664,8 @@ namespace Dynamo.TestInfrastructure
 
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.RunCancelCommand runCancel =
-                                new DynamoViewModel.RunCancelCommand(false, false);
+                            RunCancelCommand runCancel =
+                                new RunCancelCommand(false, false);
 
                             dynamoViewModel.ExecuteCommand(runCancel);
 
@@ -751,8 +751,8 @@ namespace Dynamo.TestInfrastructure
                         writer.WriteLine("### - Beginning eval");
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.RunCancelCommand runCancel =
-                                new DynamoViewModel.RunCancelCommand(false, false);
+                            RunCancelCommand runCancel =
+                                new RunCancelCommand(false, false);
                             dynamoViewModel.ExecuteCommand(runCancel);
                         }));
                         while (dynamoViewModel.Model.Runner.Running)
@@ -789,9 +789,9 @@ namespace Dynamo.TestInfrastructure
                         {
                             dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                             {
-                                DynamoViewModel.UndoRedoCommand undoCommand =
-                                    new DynamoViewModel.UndoRedoCommand(
-                                        DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                                UndoRedoCommand undoCommand =
+                                    new UndoRedoCommand(
+                                        UndoRedoCommand.Operation.Undo);
                                 dynamoViewModel.ExecuteCommand(undoCommand);
                             }));
                             Thread.Sleep(100);
@@ -805,8 +805,8 @@ namespace Dynamo.TestInfrastructure
 
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.RunCancelCommand runCancel =
-                                new DynamoViewModel.RunCancelCommand(false, false);
+                            RunCancelCommand runCancel =
+                                new RunCancelCommand(false, false);
 
                             dynamoViewModel.ExecuteCommand(runCancel);
 
@@ -898,8 +898,8 @@ namespace Dynamo.TestInfrastructure
                     writer.WriteLine("### - Beginning eval");
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
                         dynamoViewModel.ExecuteCommand(runCancel);
                     }));
                     while (dynamoViewModel.Model.Runner.Running)
@@ -936,9 +936,9 @@ namespace Dynamo.TestInfrastructure
                     {
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.UndoRedoCommand undoCommand =
-                                new DynamoViewModel.UndoRedoCommand(
-                                    DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                            UndoRedoCommand undoCommand =
+                                new UndoRedoCommand(
+                                    UndoRedoCommand.Operation.Undo);
                             dynamoViewModel.ExecuteCommand(undoCommand);
                         }));
                         Thread.Sleep(100);
@@ -949,8 +949,8 @@ namespace Dynamo.TestInfrastructure
 
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
 
                         dynamoViewModel.ExecuteCommand(runCancel);
 
@@ -1037,8 +1037,8 @@ namespace Dynamo.TestInfrastructure
                     writer.WriteLine("### - Beginning eval");
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
                         dynamoViewModel.ExecuteCommand(runCancel);
                     }));
                     while (dynamoViewModel.Model.Runner.Running)
@@ -1075,9 +1075,9 @@ namespace Dynamo.TestInfrastructure
                     {
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.UndoRedoCommand undoCommand =
-                                new DynamoViewModel.UndoRedoCommand(
-                                    DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                            UndoRedoCommand undoCommand =
+                                new UndoRedoCommand(
+                                    UndoRedoCommand.Operation.Undo);
                             dynamoViewModel.ExecuteCommand(undoCommand);
                         }));
                         Thread.Sleep(100);
@@ -1088,8 +1088,8 @@ namespace Dynamo.TestInfrastructure
 
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
 
                         dynamoViewModel.ExecuteCommand(runCancel);
 
@@ -1171,8 +1171,8 @@ namespace Dynamo.TestInfrastructure
                     writer.WriteLine("### - Beginning eval");
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
                         dynamoViewModel.ExecuteCommand(runCancel);
                     }));
                     while (dynamoViewModel.Model.Runner.Running)
@@ -1209,9 +1209,9 @@ namespace Dynamo.TestInfrastructure
                     {
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.UndoRedoCommand undoCommand =
-                                new DynamoViewModel.UndoRedoCommand(
-                                    DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                            UndoRedoCommand undoCommand =
+                                new UndoRedoCommand(
+                                    UndoRedoCommand.Operation.Undo);
                             dynamoViewModel.ExecuteCommand(undoCommand);
                         }));
                         Thread.Sleep(100);
@@ -1222,8 +1222,8 @@ namespace Dynamo.TestInfrastructure
 
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
 
                         dynamoViewModel.ExecuteCommand(runCancel);
 
@@ -1301,8 +1301,8 @@ namespace Dynamo.TestInfrastructure
                     writer.WriteLine("### - Beginning eval");
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
                         dynamoViewModel.ExecuteCommand(runCancel);
                     }));
                     while (dynamoViewModel.Model.Runner.Running)
@@ -1339,9 +1339,9 @@ namespace Dynamo.TestInfrastructure
                     {
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.UndoRedoCommand undoCommand =
-                                new DynamoViewModel.UndoRedoCommand(
-                                    DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                            UndoRedoCommand undoCommand =
+                                new UndoRedoCommand(
+                                    UndoRedoCommand.Operation.Undo);
                             dynamoViewModel.ExecuteCommand(undoCommand);
                         }));
                         Thread.Sleep(100);
@@ -1355,8 +1355,8 @@ namespace Dynamo.TestInfrastructure
 
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
 
                         dynamoViewModel.ExecuteCommand(runCancel);
 
@@ -1455,12 +1455,12 @@ namespace Dynamo.TestInfrastructure
                             double coordinatesY = 180;
 
                             //create nodes
-                            DynamoViewModel.CreateNodeCommand createNodeNumber1 =
-                                new DynamoViewModel.CreateNodeCommand(guidNumber1, "Number", coordinatesX, coordinatesY, false, true);
-                            DynamoViewModel.CreateNodeCommand createNodeNumber2 =
-                                new DynamoViewModel.CreateNodeCommand(guidNumber2, "Number", coordinatesX, coordinatesY + 100, false, true);
-                            DynamoViewModel.CreateNodeCommand createNodeNumber3 =
-                                new DynamoViewModel.CreateNodeCommand(guidNumber3, "Number", coordinatesX, coordinatesY + 200, false, true);
+                            CreateNodeCommand createNodeNumber1 =
+                                new CreateNodeCommand(guidNumber1, "Number", coordinatesX, coordinatesY, false, true);
+                            CreateNodeCommand createNodeNumber2 =
+                                new CreateNodeCommand(guidNumber2, "Number", coordinatesX, coordinatesY + 100, false, true);
+                            CreateNodeCommand createNodeNumber3 =
+                                new CreateNodeCommand(guidNumber3, "Number", coordinatesX, coordinatesY + 200, false, true);
 
                             //execute commands
                             dynamoViewModel.ExecuteCommand(createNodeNumber1);
@@ -1475,8 +1475,8 @@ namespace Dynamo.TestInfrastructure
                             writer.WriteLine("### - Beginning eval");
                             dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                             {
-                                DynamoViewModel.RunCancelCommand runCancel =
-                                    new DynamoViewModel.RunCancelCommand(false, false);
+                                RunCancelCommand runCancel =
+                                    new RunCancelCommand(false, false);
                                 dynamoViewModel.ExecuteCommand(runCancel);
                             }));
                             while (dynamoViewModel.Model.Runner.Running)
@@ -1522,8 +1522,8 @@ namespace Dynamo.TestInfrastructure
                                 {
                                     for (int j = 0; j < 3 * numberSeqNodes.Count; j++)
                                     {
-                                        DynamoViewModel.UndoRedoCommand undoCommand =
-                                            new DynamoViewModel.UndoRedoCommand(DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                                        UndoRedoCommand undoCommand =
+                                            new UndoRedoCommand(UndoRedoCommand.Operation.Undo);
                                         dynamoViewModel.ExecuteCommand(undoCommand);
                                     }
                                 }));
@@ -1535,8 +1535,8 @@ namespace Dynamo.TestInfrastructure
 
                             dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                             {
-                                DynamoViewModel.RunCancelCommand runCancel =
-                                    new DynamoViewModel.RunCancelCommand(false, false);
+                                RunCancelCommand runCancel =
+                                    new RunCancelCommand(false, false);
                                 dynamoViewModel.ExecuteCommand(runCancel);
                             }));
                             while (dynamoViewModel.Model.Runner.Running)
@@ -1590,12 +1590,12 @@ namespace Dynamo.TestInfrastructure
                     {
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.DeleteModelCommand delNumberCommand1 =
-                                new DynamoViewModel.DeleteModelCommand(Guid.Parse("fa532273-cf1d-4f41-874e-6146f634e2d3"));
-                            DynamoViewModel.DeleteModelCommand delNumberCommand2 =
-                                new DynamoViewModel.DeleteModelCommand(Guid.Parse("788dfa62-dbb2-4556-ad13-ce20ccc5ec0d"));
-                            DynamoViewModel.DeleteModelCommand delNumberCommand3 =
-                                new DynamoViewModel.DeleteModelCommand(Guid.Parse("7bfb0b00-3dbc-4ab4-ba6b-f7743b72bbc5"));
+                            DeleteModelCommand delNumberCommand1 =
+                                new DeleteModelCommand(Guid.Parse("fa532273-cf1d-4f41-874e-6146f634e2d3"));
+                            DeleteModelCommand delNumberCommand2 =
+                                new DeleteModelCommand(Guid.Parse("788dfa62-dbb2-4556-ad13-ce20ccc5ec0d"));
+                            DeleteModelCommand delNumberCommand3 =
+                                new DeleteModelCommand(Guid.Parse("7bfb0b00-3dbc-4ab4-ba6b-f7743b72bbc5"));
 
                             dynamoViewModel.ExecuteCommand(delNumberCommand1);
                             dynamoViewModel.ExecuteCommand(delNumberCommand2);
@@ -1646,12 +1646,12 @@ namespace Dynamo.TestInfrastructure
                             double coordinatesY = 180;
 
                             //create nodes
-                            DynamoViewModel.CreateNodeCommand createNodeCmd1 =
-                                new DynamoViewModel.CreateNodeCommand(guidNumber1, "Number", coordinatesX, coordinatesY, false, true);
-                            DynamoViewModel.CreateNodeCommand createNodeCmd2 =
-                                new DynamoViewModel.CreateNodeCommand(guidNumber2, "Number", coordinatesX, coordinatesY + 100, false, true);
-                            DynamoViewModel.CreateNodeCommand createNodeCmd3 =
-                                new DynamoViewModel.CreateNodeCommand(guidNumber3, "Number", coordinatesX, coordinatesY + 200, false, true);
+                            CreateNodeCommand createNodeCmd1 =
+                                new CreateNodeCommand(guidNumber1, "Number", coordinatesX, coordinatesY, false, true);
+                            CreateNodeCommand createNodeCmd2 =
+                                new CreateNodeCommand(guidNumber2, "Number", coordinatesX, coordinatesY + 100, false, true);
+                            CreateNodeCommand createNodeCmd3 =
+                                new CreateNodeCommand(guidNumber3, "Number", coordinatesX, coordinatesY + 200, false, true);
 
                             //execute commands
                             dynamoViewModel.ExecuteCommand(createNodeCmd1);
@@ -1666,8 +1666,8 @@ namespace Dynamo.TestInfrastructure
                             writer.WriteLine("### - Beginning eval");
                             dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                             {
-                                DynamoViewModel.RunCancelCommand runCancel =
-                                    new DynamoViewModel.RunCancelCommand(false, false);
+                                RunCancelCommand runCancel =
+                                    new RunCancelCommand(false, false);
                                 dynamoViewModel.ExecuteCommand(runCancel);
                             }));
                             while (dynamoViewModel.Model.Runner.Running)
@@ -1713,8 +1713,8 @@ namespace Dynamo.TestInfrastructure
                                 {
                                     for (int j = 0; j < 3 * numberRangeNodes.Count; j++)
                                     {
-                                        DynamoViewModel.UndoRedoCommand undoCommand =
-                                            new DynamoViewModel.UndoRedoCommand(DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                                        UndoRedoCommand undoCommand =
+                                            new UndoRedoCommand(UndoRedoCommand.Operation.Undo);
                                         dynamoViewModel.ExecuteCommand(undoCommand);
                                     }
                                 }));
@@ -1726,8 +1726,8 @@ namespace Dynamo.TestInfrastructure
 
                             dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                             {
-                                DynamoViewModel.RunCancelCommand runCancel =
-                                    new DynamoViewModel.RunCancelCommand(false, false);
+                                RunCancelCommand runCancel =
+                                    new RunCancelCommand(false, false);
                                 dynamoViewModel.ExecuteCommand(runCancel);
                             }));
                             while (dynamoViewModel.Model.Runner.Running)
@@ -1779,12 +1779,12 @@ namespace Dynamo.TestInfrastructure
                     {
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.DeleteModelCommand delNumberCommand1 =
-                                new DynamoViewModel.DeleteModelCommand(Guid.Parse("fa532273-cf1d-4f41-874e-6146f634e2d3"));
-                            DynamoViewModel.DeleteModelCommand delNumberCommand2 =
-                                new DynamoViewModel.DeleteModelCommand(Guid.Parse("788dfa62-dbb2-4556-ad13-ce20ccc5ec0d"));
-                            DynamoViewModel.DeleteModelCommand delNumberCommand3 =
-                                new DynamoViewModel.DeleteModelCommand(Guid.Parse("7bfb0b00-3dbc-4ab4-ba6b-f7743b72bbc5"));
+                            DeleteModelCommand delNumberCommand1 =
+                                new DeleteModelCommand(Guid.Parse("fa532273-cf1d-4f41-874e-6146f634e2d3"));
+                            DeleteModelCommand delNumberCommand2 =
+                                new DeleteModelCommand(Guid.Parse("788dfa62-dbb2-4556-ad13-ce20ccc5ec0d"));
+                            DeleteModelCommand delNumberCommand3 =
+                                new DeleteModelCommand(Guid.Parse("7bfb0b00-3dbc-4ab4-ba6b-f7743b72bbc5"));
 
                             dynamoViewModel.ExecuteCommand(delNumberCommand1);
                             dynamoViewModel.ExecuteCommand(delNumberCommand2);
@@ -1831,8 +1831,8 @@ namespace Dynamo.TestInfrastructure
                         double coordinatesY = 180;
 
                         //create auxiliar node
-                        DynamoViewModel.CreateNodeCommand createNodeCmd =
-                            new DynamoViewModel.CreateNodeCommand(guidNumber1, "Number", coordinatesX, coordinatesY, false, true);
+                        CreateNodeCommand createNodeCmd =
+                            new CreateNodeCommand(guidNumber1, "Number", coordinatesX, coordinatesY, false, true);
 
                         //execute command
                         dynamoViewModel.ExecuteCommand(createNodeCmd);
@@ -1844,8 +1844,8 @@ namespace Dynamo.TestInfrastructure
                         writer.WriteLine("### - Beginning eval");
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.RunCancelCommand runCancel =
-                                new DynamoViewModel.RunCancelCommand(false, false);
+                            RunCancelCommand runCancel =
+                                new RunCancelCommand(false, false);
                             dynamoViewModel.ExecuteCommand(runCancel);
                         }));
                         while (dynamoViewModel.Model.Runner.Running)
@@ -1891,8 +1891,8 @@ namespace Dynamo.TestInfrastructure
 
                                 for (int j = 0; j < listNodes.Count; j++)
                                 {
-                                    DynamoViewModel.UndoRedoCommand undoCommand =
-                                        new DynamoViewModel.UndoRedoCommand(DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                                    UndoRedoCommand undoCommand =
+                                        new UndoRedoCommand(UndoRedoCommand.Operation.Undo);
                                     dynamoViewModel.ExecuteCommand(undoCommand);
                                 }
                             }));
@@ -1903,8 +1903,8 @@ namespace Dynamo.TestInfrastructure
 
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.RunCancelCommand runCancel =
-                                new DynamoViewModel.RunCancelCommand(false, false);
+                            RunCancelCommand runCancel =
+                                new RunCancelCommand(false, false);
                             dynamoViewModel.ExecuteCommand(runCancel);
                         }));
                         while (dynamoViewModel.Model.Runner.Running)
@@ -1961,8 +1961,8 @@ namespace Dynamo.TestInfrastructure
                 {
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.DeleteModelCommand delNumberCmd =
-                            new DynamoViewModel.DeleteModelCommand(Guid.Parse("fa532273-cf1d-4f41-874e-6146f634e2d3"));
+                        DeleteModelCommand delNumberCmd =
+                            new DeleteModelCommand(Guid.Parse("fa532273-cf1d-4f41-874e-6146f634e2d3"));
 
                         dynamoViewModel.ExecuteCommand(delNumberCmd);
                     }));
@@ -2002,8 +2002,8 @@ namespace Dynamo.TestInfrastructure
 
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.RunCancelCommand runCancel =
-                                new DynamoViewModel.RunCancelCommand(false, false);
+                            RunCancelCommand runCancel =
+                                new RunCancelCommand(false, false);
                             dynamoViewModel.ExecuteCommand(runCancel);
                         }));
 
@@ -2026,8 +2026,9 @@ namespace Dynamo.TestInfrastructure
                             {
                                 Guid guidNumber = Guid.NewGuid();
 
-                                DynamoViewModel.CreateNodeCommand createCommand =
-                               new DynamoViewModel.CreateNodeCommand(guidNumber, nodeName, coordinatesX, coordinatesY, false, false);
+                                CreateNodeCommand createCommand =
+                                    new CreateNodeCommand(guidNumber, nodeName, coordinatesX,
+                                        coordinatesY, false, false);
                                 dynamoViewModel.ExecuteCommand(createCommand);
                             }));
 
@@ -2058,8 +2059,8 @@ namespace Dynamo.TestInfrastructure
                                 {
                                     for (int j = 0; j < 3; j++)
                                     {
-                                        DynamoViewModel.UndoRedoCommand undoCommand =
-                                            new DynamoViewModel.UndoRedoCommand(DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                                        UndoRedoCommand undoCommand =
+                                            new UndoRedoCommand(UndoRedoCommand.Operation.Undo);
                                         dynamoViewModel.ExecuteCommand(undoCommand);
                                     }
                                 }));
@@ -2070,8 +2071,8 @@ namespace Dynamo.TestInfrastructure
 
                             dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                             {
-                                DynamoViewModel.RunCancelCommand runCancel =
-                                    new DynamoViewModel.RunCancelCommand(false, false);
+                                RunCancelCommand runCancel =
+                                    new RunCancelCommand(false, false);
 
                                 dynamoViewModel.ExecuteCommand(runCancel);
                             }));
@@ -2156,8 +2157,8 @@ namespace Dynamo.TestInfrastructure
 
                     dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                     {
-                        DynamoViewModel.RunCancelCommand runCancel =
-                            new DynamoViewModel.RunCancelCommand(false, false);
+                        RunCancelCommand runCancel =
+                            new RunCancelCommand(false, false);
                         dynamoViewModel.ExecuteCommand(runCancel);
                     }));
 
@@ -2197,8 +2198,8 @@ namespace Dynamo.TestInfrastructure
 
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.OpenFileCommand openFile =
-                                new DynamoViewModel.OpenFileCommand(customNodeFilePath);
+                            OpenFileCommand openFile =
+                                new OpenFileCommand(customNodeFilePath);
                             dynamoViewModel.ExecuteCommand(openFile);
                             Thread.Sleep(100);
                         }));
@@ -2219,8 +2220,8 @@ namespace Dynamo.TestInfrastructure
                         {
                             dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                             {
-                                DynamoViewModel.UndoRedoCommand undoCommand =
-                                    new DynamoViewModel.UndoRedoCommand(DynamoViewModel.UndoRedoCommand.Operation.Undo);
+                                UndoRedoCommand undoCommand =
+                                    new UndoRedoCommand(UndoRedoCommand.Operation.Undo);
                                 dynamoViewModel.ExecuteCommand(undoCommand);
                             }));
                             Thread.Sleep(100);
@@ -2230,8 +2231,8 @@ namespace Dynamo.TestInfrastructure
 
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.RunCancelCommand runCancel =
-                                new DynamoViewModel.RunCancelCommand(false, false);
+                            RunCancelCommand runCancel =
+                                new RunCancelCommand(false, false);
 
                             dynamoViewModel.ExecuteCommand(runCancel);
                         }));
@@ -2242,8 +2243,8 @@ namespace Dynamo.TestInfrastructure
 
                         dynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                         {
-                            DynamoViewModel.SwitchTabCommand switchCmd =
-                                new DynamoViewModel.SwitchTabCommand(currentWorkspaceIndex);
+                            SwitchTabCommand switchCmd =
+                                new SwitchTabCommand(currentWorkspaceIndex);
 
                             dynamoViewModel.ExecuteCommand(switchCmd);
                             Thread.Sleep(100);

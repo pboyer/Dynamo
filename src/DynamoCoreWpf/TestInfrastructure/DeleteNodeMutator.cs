@@ -23,8 +23,8 @@ namespace Dynamo.TestInfrastructure
 
             this.DynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                 {
-                    DynamoViewModel.DeleteModelCommand delCommand =
-                        new DynamoViewModel.DeleteModelCommand(node.GUID);
+                    DeleteModelCommand delCommand =
+                        new DeleteModelCommand(node.GUID);
                 
                     DynamoViewModel.ExecuteCommand(delCommand);
 

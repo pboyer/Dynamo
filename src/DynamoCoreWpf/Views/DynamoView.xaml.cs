@@ -55,7 +55,7 @@ namespace Dynamo.Controls
         public DynamoView(DynamoViewModel dynamoViewModel)
         {
             this.dynamoViewModel = dynamoViewModel;
-            this.dynamoViewModel.UIDispatcher = this.Dispatcher;
+            this.dynamoViewModel.UIDispatcher = this.dynamoViewModel.model.Dispatcher = this.Dispatcher;
 
             this.DataContext = dynamoViewModel;
 

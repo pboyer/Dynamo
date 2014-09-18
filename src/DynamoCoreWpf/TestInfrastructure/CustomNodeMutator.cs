@@ -26,8 +26,8 @@ namespace Dynamo.TestInfrastructure
 
             DynamoViewModel.UIDispatcher.Invoke(new Action(() =>
             {
-                DynamoViewModel.SwitchTabCommand switchCmd =
-                    new DynamoViewModel.SwitchTabCommand(workspaceIndex);
+                SwitchTabCommand switchCmd =
+                    new SwitchTabCommand(workspaceIndex);
 
                 DynamoViewModel.ExecuteCommand(switchCmd);
                 Thread.Sleep(100);
@@ -40,8 +40,8 @@ namespace Dynamo.TestInfrastructure
 
             DynamoViewModel.UIDispatcher.Invoke(new Action(() =>
             {
-                DynamoViewModel.SwitchTabCommand switchCmd =
-                    new DynamoViewModel.SwitchTabCommand(customNodeWorkspaceIndex);
+                SwitchTabCommand switchCmd =
+                    new SwitchTabCommand(customNodeWorkspaceIndex);
 
                 DynamoViewModel.ExecuteCommand(switchCmd);
                 Thread.Sleep(100);
@@ -58,8 +58,8 @@ namespace Dynamo.TestInfrastructure
 
             DynamoViewModel.UIDispatcher.Invoke(new Action(() =>
             {
-                DynamoViewModel.CreateNodeCommand createCommand =
-                    new DynamoViewModel.CreateNodeCommand(numberGuid, "Number", coordinatesX, coordinatesY, false, false);
+                CreateNodeCommand createCommand =
+                    new CreateNodeCommand(numberGuid, "Number", coordinatesX, coordinatesY, false, false);
                 DynamoViewModel.ExecuteCommand(createCommand);
             }));
 
@@ -67,10 +67,10 @@ namespace Dynamo.TestInfrastructure
             {
                 DynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                 {
-                    DynamoViewModel.MakeConnectionCommand connToAnother1 =
-                        new DynamoViewModel.MakeConnectionCommand(numberGuid, 0, PortType.OUTPUT, DynamoViewModel.MakeConnectionCommand.Mode.Begin);
-                    DynamoViewModel.MakeConnectionCommand connToAnother2 =
-                        new DynamoViewModel.MakeConnectionCommand(output.GUID, 0, PortType.INPUT, DynamoViewModel.MakeConnectionCommand.Mode.End);
+                    MakeConnectionCommand connToAnother1 =
+                        new MakeConnectionCommand(numberGuid, 0, PortType.OUTPUT, MakeConnectionCommand.Mode.Begin);
+                    MakeConnectionCommand connToAnother2 =
+                        new MakeConnectionCommand(output.GUID, 0, PortType.INPUT, MakeConnectionCommand.Mode.End);
 
                     DynamoViewModel.ExecuteCommand(connToAnother1);
                     DynamoViewModel.ExecuteCommand(connToAnother2);

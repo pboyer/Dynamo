@@ -43,20 +43,20 @@ namespace Dynamo.TestInfrastructure
                 DynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                 {
                     //create commands
-                    DynamoViewModel.MakeConnectionCommand connToStart1 =
-                        new DynamoViewModel.MakeConnectionCommand(guidNumber1, 0, (PortType)1, (DynamoViewModel.MakeConnectionCommand.Mode)0);
-                    DynamoViewModel.MakeConnectionCommand connToStart2 =
-                        new DynamoViewModel.MakeConnectionCommand(n.GUID, 0, (PortType)0, (DynamoViewModel.MakeConnectionCommand.Mode)1);
+                    MakeConnectionCommand connToStart1 =
+                        new MakeConnectionCommand(guidNumber1, 0, (PortType)1, (MakeConnectionCommand.Mode)0);
+                    MakeConnectionCommand connToStart2 =
+                        new MakeConnectionCommand(n.GUID, 0, (PortType)0, (MakeConnectionCommand.Mode)1);
 
-                    DynamoViewModel.MakeConnectionCommand connToAmount1 =
-                        new DynamoViewModel.MakeConnectionCommand(guidNumber2, 0, (PortType)1, (DynamoViewModel.MakeConnectionCommand.Mode)0);
-                    DynamoViewModel.MakeConnectionCommand connToAmount2 =
-                        new DynamoViewModel.MakeConnectionCommand(n.GUID, 1, (PortType)0, (DynamoViewModel.MakeConnectionCommand.Mode)1);
+                    MakeConnectionCommand connToAmount1 =
+                        new MakeConnectionCommand(guidNumber2, 0, (PortType)1, (MakeConnectionCommand.Mode)0);
+                    MakeConnectionCommand connToAmount2 =
+                        new MakeConnectionCommand(n.GUID, 1, (PortType)0, (MakeConnectionCommand.Mode)1);
 
-                    DynamoViewModel.MakeConnectionCommand connToStep1 =
-                        new DynamoViewModel.MakeConnectionCommand(guidNumber3, 0, (PortType)1, (DynamoViewModel.MakeConnectionCommand.Mode)0);
-                    DynamoViewModel.MakeConnectionCommand connToStep2 =
-                        new DynamoViewModel.MakeConnectionCommand(n.GUID, 2, (PortType)0, (DynamoViewModel.MakeConnectionCommand.Mode)1);
+                    MakeConnectionCommand connToStep1 =
+                        new MakeConnectionCommand(guidNumber3, 0, (PortType)1, (MakeConnectionCommand.Mode)0);
+                    MakeConnectionCommand connToStep2 =
+                        new MakeConnectionCommand(n.GUID, 2, (PortType)0, (MakeConnectionCommand.Mode)1);
 
                     //execute commands
                     DynamoViewModel.ExecuteCommand(connToStart1); //"Number" with "Number Sequence" on Start

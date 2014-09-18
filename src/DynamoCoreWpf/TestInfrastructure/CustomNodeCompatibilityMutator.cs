@@ -31,10 +31,10 @@ namespace Dynamo.TestInfrastructure
             {
                 DynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                 {
-                    DynamoViewModel.MakeConnectionCommand connectCmd1 =
-                        new DynamoViewModel.MakeConnectionCommand(lastNode.GUID, 0, PortType.OUTPUT, DynamoViewModel.MakeConnectionCommand.Mode.Begin);
-                    DynamoViewModel.MakeConnectionCommand connectCmd2 =
-                        new DynamoViewModel.MakeConnectionCommand(node.GUID, 0, PortType.INPUT, DynamoViewModel.MakeConnectionCommand.Mode.End);
+                    MakeConnectionCommand connectCmd1 =
+                        new MakeConnectionCommand(lastNode.GUID, 0, PortType.OUTPUT, MakeConnectionCommand.Mode.Begin);
+                    MakeConnectionCommand connectCmd2 =
+                        new MakeConnectionCommand(node.GUID, 0, PortType.INPUT, MakeConnectionCommand.Mode.End);
 
                     DynamoViewModel.ExecuteCommand(connectCmd1);
                     DynamoViewModel.ExecuteCommand(connectCmd2);
@@ -44,10 +44,10 @@ namespace Dynamo.TestInfrastructure
             {
                 DynamoViewModel.UIDispatcher.Invoke(new Action(() =>
                 {
-                    DynamoViewModel.MakeConnectionCommand connectCmd1 =
-                        new DynamoViewModel.MakeConnectionCommand(node.GUID, 0, PortType.OUTPUT, DynamoViewModel.MakeConnectionCommand.Mode.Begin);
-                    DynamoViewModel.MakeConnectionCommand connectCmd2 =
-                        new DynamoViewModel.MakeConnectionCommand(lastNode.GUID, 0, PortType.INPUT, DynamoViewModel.MakeConnectionCommand.Mode.End);
+                    MakeConnectionCommand connectCmd1 =
+                        new MakeConnectionCommand(node.GUID, 0, PortType.OUTPUT, MakeConnectionCommand.Mode.Begin);
+                    MakeConnectionCommand connectCmd2 =
+                        new MakeConnectionCommand(lastNode.GUID, 0, PortType.INPUT, MakeConnectionCommand.Mode.End);
 
                     DynamoViewModel.ExecuteCommand(connectCmd1);
                     DynamoViewModel.ExecuteCommand(connectCmd2);

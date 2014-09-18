@@ -62,7 +62,7 @@ namespace Dynamo.TestInfrastructure
 
                     }
 
-                var cmd = new DynamoViewModel.UpdateModelValueCommand(node.GUID, "Code", replacement);
+                var cmd = new UpdateModelValueCommand(node.GUID, "Code", replacement);
                 
                 this.DynamoViewModel.ExecuteCommand(cmd);
 

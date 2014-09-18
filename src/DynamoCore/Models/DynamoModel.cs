@@ -101,6 +101,7 @@ namespace Dynamo.Models
         public EngineController EngineController { get; private set; }
         public PreferenceSettings PreferenceSettings { get; private set; }
         public IUpdateManager UpdateManager { get; private set; }
+        public Dispatcher Dispatcher { get; set; }
 
         // KILLDYNSETTINGS: wut am I!?!
         public string UnlockLoadPath { get; set; }
@@ -280,6 +281,7 @@ namespace Dynamo.Models
 
         protected DynamoModel(StartConfiguration configuration)
         {
+            this.Dispatcher = Dispatcher.CurrentDispatcher;
             string context = configuration.Context;
             IPreferences preferences = configuration.Preferences;
             string corePath = configuration.DynamoCorePath;
@@ -418,7 +420,7 @@ namespace Dynamo.Models
             Runner.RunExpression(this.HomeSpace);
         }
 
-        internal void RunCancelInternal(bool displayErrors, bool cancelRun)
+        private void RunCancelInternal(bool displayErrors, bool cancelRun)
         {
             if (cancelRun)
                 Runner.CancelAsync(this.EngineController);
@@ -426,7 +428,7 @@ namespace Dynamo.Models
                 RunExpression();
         }
 
-        internal void ForceRunCancelInternal(bool displayErrors, bool cancelRun)
+        private void ForceRunCancelInternal(bool displayErrors, bool cancelRun)
         {
             if (cancelRun)
                 Runner.CancelAsync(this.EngineController);
@@ -500,7 +502,7 @@ namespace Dynamo.Models
             Debug.WriteLine("Node map now contains {0} nodes.", nodeMap.Count);
         }
 
-        internal void OpenInternal(string xmlPath)
+        private void OpenInternal(string xmlPath)
         {
             if (!OpenDefinition(xmlPath))
             {
@@ -638,7 +640,7 @@ namespace Dynamo.Models
             CurrentWorkspace = HomeSpace;
         }
 
-        internal void DeleteModelInternal(List<ModelBase> modelsToDelete)
+        private void DeleteModelInternal(List<ModelBase> modelsToDelete)
         {
             if (null == this.currentWorkspace)
                 return;
