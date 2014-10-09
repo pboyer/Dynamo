@@ -1,4 +1,6 @@
-﻿using Dynamo.UI.Commands;
+﻿using System.Windows.Input;
+
+using Dynamo.UI.Commands;
 
 namespace Dynamo.ViewModels
 {
@@ -51,10 +53,10 @@ namespace Dynamo.ViewModels
             GoToSourceCodeCommand = new DelegateCommand(GoToSourceCode, CanGoToSourceCode);
             DisplayStartPageCommand = new DelegateCommand(DisplayStartPage, CanDisplayStartPage);
             ShowPackageManagerSearchCommand = new DelegateCommand(ShowPackageManagerSearch, CanShowPackageManagerSearch);
-            PublishNewPackageCommand = new DelegateCommand(PackageManagerClientViewModel.PublishNewPackage, PackageManagerClientViewModel.CanPublishNewPackage);
+            PublishNewPackageCommand = new VoidDelegateCommand(PackageManagerClientViewModel.PublishNewPackage, PackageManagerClientViewModel.CanPublishNewPackage);
             ShowInstalledPackagesCommand = new DelegateCommand(ShowInstalledPackages, CanShowInstalledPackages);
-            PublishCurrentWorkspaceCommand = new DelegateCommand(PackageManagerClientViewModel.PublishCurrentWorkspace, PackageManagerClientViewModel.CanPublishCurrentWorkspace);
-            PublishSelectedNodesCommand = new DelegateCommand(PackageManagerClientViewModel.PublishSelectedNodes, PackageManagerClientViewModel.CanPublishSelectedNodes);
+            PublishCurrentWorkspaceCommand = new VoidDelegateCommand(PackageManagerClientViewModel.PublishCurrentWorkspace, PackageManagerClientViewModel.CanPublishCurrentWorkspace);
+            PublishSelectedNodesCommand = new VoidDelegateCommand(PackageManagerClientViewModel.PublishSelectedNodes, PackageManagerClientViewModel.CanPublishSelectedNodes);
             ShowHideConnectorsCommand = new DelegateCommand(ShowConnectors, CanShowConnectors);
             SelectNeighborsCommand = new DelegateCommand(SelectNeighbors, CanSelectNeighbors);
             ClearLogCommand = new DelegateCommand(ClearLog, CanClearLog);
@@ -77,75 +79,75 @@ namespace Dynamo.ViewModels
             CheckForLatestRenderCommand = new DelegateCommand(CheckForLatestRender, CanCheckForLatestRender);
         }
 
-        public DelegateCommand OpenCommand { get; set; }
-        public DelegateCommand ShowOpenDialogAndOpenResultCommand { get; set; }
-        public DelegateCommand WriteToLogCmd { get; set; }
-        public DelegateCommand PostUiActivationCommand { get; set; }
-        public DelegateCommand AddNoteCommand { get; set; }
-        public DelegateCommand UndoCommand { get; set; }
-        public DelegateCommand RedoCommand { get; set; }
-        public DelegateCommand CopyCommand { get; set; }
-        public DelegateCommand PasteCommand { get; set; }
-        public DelegateCommand AddToSelectionCommand { get; set; }
-        public DelegateCommand ShowNewFunctionDialogCommand { get; set; }
-        public DelegateCommand SaveRecordedCommand { get; set; }
-        public DelegateCommand InsertPausePlaybackCommand { get; set; }
-        public DelegateCommand GraphAutoLayoutCommand { get; set; }
-        public DelegateCommand GoHomeCommand { get; set; }
-        public DelegateCommand ShowPackageManagerSearchCommand { get; set; }
-        public DelegateCommand ShowInstalledPackagesCommand { get; set; }
-        public DelegateCommand HomeCommand { get; set; }
-        public DelegateCommand ExitCommand { get; set; }
-        public DelegateCommand ShowSaveDialogIfNeededAndSaveResultCommand { get; set; }
-        public DelegateCommand ShowSaveDialogAndSaveResultCommand { get; set; }
-        public DelegateCommand SaveCommand { get; set; }
-        public DelegateCommand SaveAsCommand { get; set; }
-        public DelegateCommand NewHomeWorkspaceCommand { get; set; }
-        public DelegateCommand CloseHomeWorkspaceCommand { get; set; }
-        public DelegateCommand GoToWorkspaceCommand { get; set; }
-        public DelegateCommand DeleteCommand { get; set; }
-        public DelegateCommand AlignSelectedCommand { get; set; }
-        public DelegateCommand PostUIActivationCommand { get; set; }
-        public DelegateCommand ToggleFullscreenWatchShowingCommand { get; set; }
-        public DelegateCommand ToggleCanNavigateBackgroundCommand { get; set; }
-        public DelegateCommand SelectAllCommand { get; set; }
-        public DelegateCommand SaveImageCommand { get; set; }
-        public DelegateCommand ShowSaveImageDialogAndSaveResultCommand { get; set; }
-        public DelegateCommand ToggleConsoleShowingCommand { get; set; }
-        public DelegateCommand ShowPackageManagerCommand { get; set; }
-        public DelegateCommand CancelRunCommand { get; set; }
-        public DelegateCommand RunExpressionCommand { get; set; }
-        public DelegateCommand ForceRunExpressionCommand { get; set; }
-        public DelegateCommand MutateTestDelegateCommand { get; set; }
-        public DelegateCommand DisplayFunctionCommand { get; set; }
-        public DelegateCommand SetConnectorTypeCommand { get; set; }
-        public DelegateCommand ReportABugCommand { get; set; }
-        public DelegateCommand GoToWikiCommand { get; set; }
-        public DelegateCommand GoToSourceCodeCommand { get; set; }
-        public DelegateCommand DisplayStartPageCommand { get; set; }
-        public DelegateCommand ShowHideConnectorsCommand { get; set; }
-        public DelegateCommand SelectNeighborsCommand { get; set; }
-        public DelegateCommand ClearLogCommand { get; set; }
-        public DelegateCommand SubmitCommand { get; set; }
-        public DelegateCommand PublishNewPackageCommand { get; set; }
-        public DelegateCommand PublishCurrentWorkspaceCommand { get; set; }
-        public DelegateCommand PublishSelectedNodesCommand { get; set; }
-        public DelegateCommand PanCommand { get; set; }
-        public DelegateCommand ZoomInCommand { get; set; }
-        public DelegateCommand ZoomOutCommand { get; set; }
-        public DelegateCommand FitViewCommand { get; set; }
-        public DelegateCommand TogglePanCommand { get; set; }
-        public DelegateCommand ToggleOrbitCommand { get; set; }
-        public DelegateCommand EscapeCommand { get; set; }
-        public DelegateCommand ExportToSTLCommand { get; set; }
-        public DelegateCommand ImportLibraryCommand { get; set; }
-        public DelegateCommand SetLengthUnitCommand { get; set; }
-        public DelegateCommand SetAreaUnitCommand { get; set; }
-        public DelegateCommand SetVolumeUnitCommand { get; set; }
-        public DelegateCommand ShowAboutWindowCommand { get; set; }
-        public DelegateCommand SetNumberFormatCommand { get; set; }
-        public DelegateCommand OpenRecentCommand { get; set; }
-        public DelegateCommand GetBranchVisualizationCommand { get; set; }
-        public DelegateCommand CheckForLatestRenderCommand { get; set; }
+        public IDelegateCommand OpenCommand { get; set; }
+        public IDelegateCommand ShowOpenDialogAndOpenResultCommand { get; set; }
+        public IDelegateCommand WriteToLogCmd { get; set; }
+        public IDelegateCommand PostUiActivationCommand { get; set; }
+        public IDelegateCommand AddNoteCommand { get; set; }
+        public IDelegateCommand UndoCommand { get; set; }
+        public IDelegateCommand RedoCommand { get; set; }
+        public IDelegateCommand CopyCommand { get; set; }
+        public IDelegateCommand PasteCommand { get; set; }
+        public IDelegateCommand AddToSelectionCommand { get; set; }
+        public IDelegateCommand ShowNewFunctionDialogCommand { get; set; }
+        public IDelegateCommand SaveRecordedCommand { get; set; }
+        public IDelegateCommand InsertPausePlaybackCommand { get; set; }
+        public IDelegateCommand GraphAutoLayoutCommand { get; set; }
+        public IDelegateCommand GoHomeCommand { get; set; }
+        public IDelegateCommand ShowPackageManagerSearchCommand { get; set; }
+        public IDelegateCommand ShowInstalledPackagesCommand { get; set; }
+        public IDelegateCommand HomeCommand { get; set; }
+        public IDelegateCommand ExitCommand { get; set; }
+        public IDelegateCommand ShowSaveDialogIfNeededAndSaveResultCommand { get; set; }
+        public IDelegateCommand ShowSaveDialogAndSaveResultCommand { get; set; }
+        public IDelegateCommand SaveCommand { get; set; }
+        public IDelegateCommand SaveAsCommand { get; set; }
+        public IDelegateCommand NewHomeWorkspaceCommand { get; set; }
+        public IDelegateCommand CloseHomeWorkspaceCommand { get; set; }
+        public IDelegateCommand GoToWorkspaceCommand { get; set; }
+        public IDelegateCommand DeleteCommand { get; set; }
+        public IDelegateCommand AlignSelectedCommand { get; set; }
+        public IDelegateCommand PostUIActivationCommand { get; set; }
+        public IDelegateCommand ToggleFullscreenWatchShowingCommand { get; set; }
+        public IDelegateCommand ToggleCanNavigateBackgroundCommand { get; set; }
+        public IDelegateCommand SelectAllCommand { get; set; }
+        public IDelegateCommand SaveImageCommand { get; set; }
+        public IDelegateCommand ShowSaveImageDialogAndSaveResultCommand { get; set; }
+        public IDelegateCommand ToggleConsoleShowingCommand { get; set; }
+        public IDelegateCommand ShowPackageManagerCommand { get; set; }
+        public IDelegateCommand CancelRunCommand { get; set; }
+        public IDelegateCommand RunExpressionCommand { get; set; }
+        public IDelegateCommand ForceRunExpressionCommand { get; set; }
+        public IDelegateCommand MutateTestDelegateCommand { get; set; }
+        public IDelegateCommand DisplayFunctionCommand { get; set; }
+        public IDelegateCommand SetConnectorTypeCommand { get; set; }
+        public IDelegateCommand ReportABugCommand { get; set; }
+        public IDelegateCommand GoToWikiCommand { get; set; }
+        public IDelegateCommand GoToSourceCodeCommand { get; set; }
+        public IDelegateCommand DisplayStartPageCommand { get; set; }
+        public IDelegateCommand ShowHideConnectorsCommand { get; set; }
+        public IDelegateCommand SelectNeighborsCommand { get; set; }
+        public IDelegateCommand ClearLogCommand { get; set; }
+        public IDelegateCommand SubmitCommand { get; set; }
+        public IDelegateCommand PublishNewPackageCommand { get; set; }
+        public IDelegateCommand PublishCurrentWorkspaceCommand { get; set; }
+        public IDelegateCommand PublishSelectedNodesCommand { get; set; }
+        public IDelegateCommand PanCommand { get; set; }
+        public IDelegateCommand ZoomInCommand { get; set; }
+        public IDelegateCommand ZoomOutCommand { get; set; }
+        public IDelegateCommand FitViewCommand { get; set; }
+        public IDelegateCommand TogglePanCommand { get; set; }
+        public IDelegateCommand ToggleOrbitCommand { get; set; }
+        public IDelegateCommand EscapeCommand { get; set; }
+        public IDelegateCommand ExportToSTLCommand { get; set; }
+        public IDelegateCommand ImportLibraryCommand { get; set; }
+        public IDelegateCommand SetLengthUnitCommand { get; set; }
+        public IDelegateCommand SetAreaUnitCommand { get; set; }
+        public IDelegateCommand SetVolumeUnitCommand { get; set; }
+        public IDelegateCommand ShowAboutWindowCommand { get; set; }
+        public IDelegateCommand SetNumberFormatCommand { get; set; }
+        public IDelegateCommand OpenRecentCommand { get; set; }
+        public IDelegateCommand GetBranchVisualizationCommand { get; set; }
+        public IDelegateCommand CheckForLatestRenderCommand { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace Dynamo.UI.Controls
         private string imgNormalSource;
         private string imgHoverSource;
         private string imgDisabledSource;
-        private DelegateCommand shortcutCommand;
+        private IDelegateCommand shortcutCommand;
         private string shortcutCommandParameter;
 
         public string ShortcutCommandParameter
@@ -44,7 +44,7 @@ namespace Dynamo.UI.Controls
             set { shortcutCommandParameter = value; }
         }
 
-        public DelegateCommand ShortcutCommand
+        public IDelegateCommand ShortcutCommand
         {
             get { return shortcutCommand; }
             set { shortcutCommand = value; }

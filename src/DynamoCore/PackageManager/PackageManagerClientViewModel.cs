@@ -51,7 +51,7 @@ namespace Dynamo.ViewModels
             this.CachedPackageList = new List<PackageManagerSearchElement>();
         }
 
-        public void PublishCurrentWorkspace(object m)
+        public void PublishCurrentWorkspace()
         {
             var currentFunDef =
                 dynamoViewModel.Model.CustomNodeManager.GetDefinitionFromWorkspace(dynamoViewModel.Model.CurrentWorkspace);
@@ -66,23 +66,23 @@ namespace Dynamo.ViewModels
             }
         }
 
-        public bool CanPublishCurrentWorkspace(object m)
+        public bool CanPublishCurrentWorkspace()
         {
             return dynamoViewModel.Model.CurrentWorkspace is CustomNodeWorkspaceModel
                 && Model.HasAuthenticator;
         }
 
-        public void PublishNewPackage(object m)
+        public void PublishNewPackage()
         {
             ShowNodePublishInfo();
         }
 
-        public bool CanPublishNewPackage(object m)
+        public bool CanPublishNewPackage()
         {
             return Model.HasAuthenticator;
         }
 
-        public void PublishSelectedNodes(object m)
+        public void PublishSelectedNodes()
         {
             var nodeList = DynamoSelection.Instance.Selection
                                 .Where(x => x is Function)
@@ -104,7 +104,7 @@ namespace Dynamo.ViewModels
             ShowNodePublishInfo(defs);
         }
 
-        public bool CanPublishSelectedNodes(object m)
+        public bool CanPublishSelectedNodes()
         {
             return DynamoSelection.Instance.Selection.Count > 0 &&
                 DynamoSelection.Instance.Selection.All(x => x is Function) &&

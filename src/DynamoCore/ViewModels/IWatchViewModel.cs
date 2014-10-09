@@ -1,11 +1,13 @@
-﻿using Dynamo.UI.Commands;
+﻿using System.Windows.Input;
+
+using Dynamo.UI.Commands;
 
 namespace Dynamo.ViewModels
 {
     public interface IWatchViewModel
     {
-        DelegateCommand GetBranchVisualizationCommand { get; set; }
+        IDelegateCommand GetBranchVisualizationCommand { get; set; }
         bool WatchIsResizable { get; set; }
-        DelegateCommand CheckForLatestRenderCommand { get; set; }
+        IDelegateCommand CheckForLatestRenderCommand { get; set; }
     }
 }
