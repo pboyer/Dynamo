@@ -15,7 +15,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml;
-
+using Dynamo.Models;
 using ICSharpCode.AvalonEdit.Rendering;
 using DynCmd = Dynamo.Models.DynamoModel;
 
@@ -52,7 +52,7 @@ namespace Dynamo.UI.Controls
             this.DataContext = nodeViewModel.NodeModel;
             this.nodeModel = nodeViewModel.NodeModel as CodeBlockNodeModel;
 
-            // Register text editing events
+            // Register text editing events            
             this.InnerTextEditor.TextChanged += InnerTextEditor_TextChanged;
             this.InnerTextEditor.TextArea.LostFocus += TextArea_LostFocus;
 
@@ -71,7 +71,8 @@ namespace Dynamo.UI.Controls
 
         private IEnumerable<ICompletionData> GetCompletionData(string code, string stringToComplete)
         {
-            var engineController = this.dynamoViewModel.Model.EngineController;
+            var engineController =
+                dynamoViewModel.EngineController;
 
             return engineController.CodeCompletionServices.GetCompletionsOnType(code, stringToComplete).
                 Select(x => new CodeBlockCompletionData(x));
@@ -79,7 +80,7 @@ namespace Dynamo.UI.Controls
 
         internal IEnumerable<ICompletionData> SearchCompletions(string stringToComplete, Guid guid)
         {
-            var engineController = this.dynamoViewModel.Model.EngineController;
+            var engineController = dynamoViewModel.EngineController;
 
             return engineController.CodeCompletionServices.SearchCompletions(stringToComplete, guid).
                 Select(x => new CodeBlockCompletionData(x));
@@ -87,7 +88,7 @@ namespace Dynamo.UI.Controls
 
         internal IEnumerable<CodeBlockInsightItem> GetFunctionSignatures(string code, string functionName, string functionPrefix)
         {
-            var engineController = this.dynamoViewModel.Model.EngineController;
+            var engineController = dynamoViewModel.EngineController;
 
             return engineController.CodeCompletionServices.GetFunctionSignatures(code, functionName, functionPrefix).
                 Select(x => new CodeBlockInsightItem(x));
@@ -162,7 +163,7 @@ namespace Dynamo.UI.Controls
                 Foreground = new CodeBlockEditorUtils.CustomizedBrush(color)
             };
 
-            var engineController = this.dynamoViewModel.Model.EngineController;
+            var engineController = dynamoViewModel.EngineController;
 
             var wordList = engineController.CodeCompletionServices.GetClasses();
             String regex = String.Format(@"\b({0})({0})?\b", String.Join("|", wordList));
@@ -180,7 +181,7 @@ namespace Dynamo.UI.Controls
                 Foreground = new CodeBlockEditorUtils.CustomizedBrush(color)
             };
 
-            var engineController = this.dynamoViewModel.Model.EngineController;
+            var engineController = dynamoViewModel.EngineController;
 
             var wordList = engineController.CodeCompletionServices.GetGlobals();
             String regex = String.Format(@"\b({0})({0})?\b", String.Join("|", wordList));
@@ -377,10 +378,9 @@ namespace Dynamo.UI.Controls
         void TextArea_LostFocus(object sender, RoutedEventArgs e)
         {
             this.InnerTextEditor.TextArea.ClearSelection();
-
             this.nodeViewModel.DynamoViewModel.ExecuteCommand(
-                new DynCmd.UpdateModelValueCommand(
-                    this.nodeViewModel.NodeModel.GUID, "Code", this.InnerTextEditor.Text));
+                   new DynCmd.UpdateModelValueCommand(
+                       this.nodeViewModel.NodeModel.GUID, "Code", this.InnerTextEditor.Text));           
         }
 
         void InnerTextEditor_TextChanged(object sender, EventArgs e)
@@ -388,7 +388,7 @@ namespace Dynamo.UI.Controls
             if (WatermarkLabel.Visibility == Visibility.Visible)
                 WatermarkLabel.Visibility = Visibility.Collapsed;
 
-        }
+        }       
         #endregion
 
         #region Private Helper Methods
@@ -408,11 +408,18 @@ namespace Dynamo.UI.Controls
 
             var text = this.InnerTextEditor.Text;
             var cb = DataContext as CodeBlockNodeModel;
-
+          
             if (cb == null || cb.Code != null && text.Equals(cb.Code))
                 OnRequestReturnFocusToSearch();
             else
                 this.InnerTextEditor.Text = (DataContext as CodeBlockNodeModel).Code;
+
+            //Delete the empty code block node on esc press
+            if (text == "")
+            {
+                this.nodeViewModel.DynamoViewModel.ExecuteCommand(
+                    new DynCmd.DeleteModelCommand(this.nodeViewModel.NodeModel.GUID));             
+            }
         }
         #endregion
 
@@ -423,7 +430,6 @@ namespace Dynamo.UI.Controls
         /// </summary>        
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
-
             if (e.KeyboardDevice.Modifiers.HasFlag(System.Windows.Input.ModifierKeys.Shift))
             {
                 if (e.Key == Key.Enter || e.Key == Key.Return)
