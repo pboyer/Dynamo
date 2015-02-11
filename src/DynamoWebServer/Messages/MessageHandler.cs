@@ -83,8 +83,6 @@ namespace DynamoWebServer.Messages
         /// <returns>Reconstructed Message</returns>
         internal Message DeserializeMessage(string jsonString)
         {
-            Console.WriteLine(jsonString);
-
             try
             {
                 var jObject = JObject.Parse(jsonString);
