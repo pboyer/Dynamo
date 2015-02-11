@@ -280,6 +280,7 @@ namespace Dynamo.Models
 
         public struct StartConfiguration
         {
+            public bool UseInstrumentationLogger { get; set; }
             public string Context { get; set; }
             public string DynamoCorePath { get; set; }
             public IPreferences Preferences { get; set; }
@@ -352,7 +353,11 @@ namespace Dynamo.Models
             }
 
             InitializePreferences(preferences);
-            InitializeInstrumentationLogger();
+
+            if (configuration.UseInstrumentationLogger)
+            {
+                InitializeInstrumentationLogger();
+            }
 
             UpdateManager.UpdateManager.CheckForProductUpdate();
 

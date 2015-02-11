@@ -91,7 +91,7 @@ namespace DynamoWebServer
             }
             else
             {
-                LogInfo("Web socket: can`t send response, socket not initialized! No clients connected? \n  SessionId: [" + sessionId + "]");
+                LogInfo("Web socket: can`t send response, socke t not initialized! No clients connected? \n  SessionId: [" + sessionId + "]");
             }
         }
 
@@ -161,8 +161,7 @@ namespace DynamoWebServer
             {
                 return;
             }
-
-            LogInfo("Web socket: disconnected");
+            LogInfo("Web socket: disconnected.  Reason: " + reason.ToString());
         }
 
         void SendAnswerToWebSocket(object sender, ResultReadyEventArgs e)
@@ -200,6 +199,7 @@ namespace DynamoWebServer
 
         void LogInfo(string info)
         {
+            Console.WriteLine(info);
             if (dynamoModel.Logger != null)
                 dynamoModel.Logger.Log(info);
         }

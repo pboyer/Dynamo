@@ -1,0 +1,23 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "ubuntu-14.10-amd64"
+  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/utopic/current/utopic-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.synced_folder "../bin/AnyCPU/Debug", "/dynamo"
+  config.vm.synced_folder "../../LibG", "/LibG"
+  config.vm.synced_folder "C:/Program Files/Autodesk", "/Autodesk"
+  config.vm.network :forwarded_port, host: 2100, guest: 2100
+
+  config.vm.provider "virtualbox" do |v|
+    v.customize ["modifyvm", :id, "--memory", "8192"]
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+	v.gui = true
+  end
+
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = 'puppet/manifests'
+    puppet.manifest_file = 'main.pp'
+    puppet.module_path = 'puppet/modules'
+    puppet.options << [ '--verbose' ]
+  end
+end

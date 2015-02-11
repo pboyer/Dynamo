@@ -176,7 +176,7 @@ namespace DynamoUtilities
             sb.AppendLine(String.Format("Asm: {0}", LibG));
             Nodes.ToList().ForEach(n=>sb.AppendLine(String.Format("Nodes: {0}", n)));
             
-            Debug.WriteLine(sb);
+            Console.WriteLine(sb);
 #endif
             var coreLibs = new List<string>
             {
@@ -293,7 +293,8 @@ namespace DynamoUtilities
 
         public void SetLibGPath(string version)
         {
-            LibG = Path.Combine(MainExecPath, string.Format("libg_{0}", version));
+            // FIX THIS
+            LibG = Path.Combine(MainExecPath, string.Format("libg_{0}_linux", version));
             var splits = LibG.Split('\\');
             GeometryFactory = splits.Last() + "\\" + "LibG.ProtoInterface.dll";
             AsmPreloader = Path.Combine(
@@ -410,7 +411,7 @@ namespace DynamoUtilities
         /// </summary>
         public static bool PreloadAsmLibraries(DynamoPathManager pathManager)
         {
-            if (PreloadAsmVersion("219", pathManager)) return true;
+            //if (PreloadAsmVersion("219", pathManager)) return true;
             if (PreloadAsmVersion("220", pathManager)) return true;
             
             return false;
