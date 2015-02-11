@@ -91,7 +91,7 @@ namespace DynamoWebServer
             }
             else
             {
-                LogInfo("Web socket: can`t send response, socke t not initialized! No clients connected? \n  SessionId: [" + sessionId + "]");
+                LogInfo("Web socket: can`t send response, socket not initialized! No clients connected? \n  SessionId: [" + sessionId + "]");
             }
         }
 

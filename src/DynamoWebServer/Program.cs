@@ -46,30 +46,5 @@ namespace DynamoWebServer
 
             while (true) {}
         }
-         
-        public static bool PreloadAsmVersion(string libGLibraryDirectory, string asmLibraryDirectory)
-        {
-            Console.WriteLine("Attempting to load asm libraries from : {0} ", asmLibraryDirectory);
-
-            var libG = Assembly.LoadFrom(Path.Combine(libGLibraryDirectory, "LibG.AsmPreloader.Managed.dll"));
-
-            Type preloadType = libG.GetType("Autodesk.LibG.AsmPreloader");
-
-            MethodInfo preloadMethod = preloadType.GetMethod(
-                "PreloadAsmLibraries",
-                BindingFlags.Public | BindingFlags.Static);
-
-            if (preloadMethod == null)
-                throw new MissingMethodException(@"Method ""PreloadAsmLibraries"" not found");
-
-            var methodParams = new object[1];
-            methodParams[0] = asmLibraryDirectory;
-
-            preloadMethod.Invoke(null, methodParams);
-
-            Console.WriteLine(string.Format("Successfully loaded ASM"));
-            return true;
-        }
-
     }
 }
