@@ -12,7 +12,7 @@ using SuperSocket.SocketBase.Logging;
 
 namespace DynamoWebServer
 {
-    class Program
+    internal class Program
     {
         [STAThread]
         public static void Main(string[] args)
@@ -20,21 +20,15 @@ namespace DynamoWebServer
             DynamoPathManager.Instance.InitializeCore(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
 
-            // It is not yet known to me why, but this encantation is
-            // necessary to make the geometry library work
-
-            // Occasionally it fails with a NullReferenceException
-            HostFactory.Instance.StartUp();
-            var res = Point.ByCoordinates(0, 0);
-            var sphere = Sphere.ByCenterPointRadius(res, 1);
-            Console.WriteLine(sphere.ToString());
+            InitGeometryLibrary();
 
             var model = DynamoModel.Start(
                 new DynamoModel.StartConfiguration()
                 {
                     Preferences = PreferenceSettings.Load()
                 });
-            model.MaxTesselationDivisions = int.Parse(ConfigurationManager.AppSettings["MaxTesselationDivisions"]);
+            model.MaxTesselationDivisions =
+                int.Parse(ConfigurationManager.AppSettings["MaxTesselationDivisions"]);
 
             var webSocketServer = new WebServer(model, new WebSocket());
 
@@ -44,7 +38,27 @@ namespace DynamoWebServer
 
             Process.GetCurrentProcess().Exited += webSocketServer.ProcessExited;
 
-            while (true) {}
+            while (true) { }
+        }
+
+        private static void InitGeometryLibrary()
+        {
+            int p = (int)Environment.OSVersion.Platform;
+            if ((p == 4) || (p == 128))
+            {
+                // It is not yet known to me why, but this encantation is
+                // necessary to make the geometry library work
+
+                // Occasionally it fails with a NullReferenceException
+                HostFactory.Instance.StartUp();
+                var res = Point.ByCoordinates(0, 0);
+                var sphere = Sphere.ByCenterPointRadius(res, 1);
+                Console.WriteLine(sphere.ToString());
+            }
+            else
+            {
+                DynamoPathManager.PreloadAsmLibraries(DynamoPathManager.Instance);
+            }
         }
     }
 }
