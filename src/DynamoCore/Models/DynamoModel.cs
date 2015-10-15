@@ -1140,7 +1140,18 @@ namespace Dynamo.Models
         {
             var xmlDoc = new XmlDocument();
             xmlDoc.Load(xmlPath);
+            OpenFileFromXmlDocument(xmlDoc, forceManualExecutionMode, xmlPath );
+        }
 
+        public void OpenFileFromStream(Stream stream, bool forceManualExecutionMode = false)
+        {
+            var xmlDoc = new XmlDocument();
+            xmlDoc.Load(stream);
+            OpenFileFromXmlDocument(xmlDoc, forceManualExecutionMode);
+        }
+
+        private void OpenFileFromXmlDocument(XmlDocument xmlDoc, bool forceManualExecutionMode, string xmlPath = "")
+        {
             WorkspaceInfo workspaceInfo;
             if (WorkspaceInfo.FromXmlDocument(xmlDoc, xmlPath, IsTestMode, forceManualExecutionMode, Logger, out workspaceInfo))
             {
