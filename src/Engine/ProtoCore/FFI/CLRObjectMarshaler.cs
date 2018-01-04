@@ -99,9 +99,6 @@ namespace ProtoFFI
         }
     }
 
-    /// <summary>
-    /// Marshales integer based primitive types.
-    /// </summary>
     class IntMarshaler : PrimitiveMarshaler
     {
         public long MaxValue { get; private set; }
@@ -136,9 +133,6 @@ namespace ProtoFFI
         }
     }
 
-    /// <summary>
-    /// Marshales floating point primitive types.
-    /// </summary>
     class FloatMarshaler : PrimitiveMarshaler
     {
         public double MaxValue { get; private set; }
@@ -171,9 +165,6 @@ namespace ProtoFFI
         }
     }
 
-    /// <summary>
-    /// Marshales boolean
-    /// </summary>
     class BoolMarshaler : PrimitiveMarshaler
     {
         private static readonly ProtoCore.Type kType = CreateType(ProtoCore.PrimitiveType.Bool);
@@ -190,9 +181,6 @@ namespace ProtoFFI
         }
     }
 
-    /// <summary>
-    /// Marshales char
-    /// </summary>
     class CharMarshaler : PrimitiveMarshaler
     {
         private static readonly ProtoCore.Type kType = CreateType(ProtoCore.PrimitiveType.Char);
@@ -577,9 +565,6 @@ namespace ProtoFFI
         }
     }
 
-    /// <summary>
-    /// Marshales string as array of chars
-    /// </summary>
     class StringMarshaler : PrimitiveMarshaler 
     {
         public static readonly ProtoCore.Type kType = CreateType(ProtoCore.PrimitiveType.String);
@@ -602,7 +587,7 @@ namespace ProtoFFI
     }
 
     /// <summary>
-    /// This class marshales CLR Objects to DS Object and vice-versa.
+    /// This class marshals CLR Objects to DS Object and vice-versa.
     /// </summary>
     class CLRObjectMarshaler : FFIObjectMarshaler
     {
