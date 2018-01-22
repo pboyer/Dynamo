@@ -4,6 +4,8 @@ using System.Reflection;
 using System.IO;
 using System.Linq;
 using System.Diagnostics;
+using System.Collections.Generic;
+using ProtoCore.Utils;
 
 namespace DynamoSandbox
 {
@@ -11,9 +13,148 @@ namespace DynamoSandbox
     {
         private static string dynamopath;
 
+        static IEnumerable<string> DirSearch(string dir)
+        {
+            foreach (string d in Directory.GetDirectories(dir))
+            {
+                foreach (var ff in DirSearch(d))
+                {
+                    yield return ff;
+                }
+            }
+
+            foreach (string f in Directory.GetFiles(dir))
+            {
+                // if (f.EndsWith(".cs"))
+                if (f.EndsWith("MicroFeatureTests.cs"))
+                        yield return f;
+            }
+        }
+
         [STAThread]
         public static void Main(string[] args)
-        {   
+        {
+            var prefix = @"C:\Users\boyerp\Dynamo\test\Engine";
+
+            foreach (var test in DirSearch(prefix))
+            {
+                System.Console.WriteLine(test);
+                var src = File.ReadAllText(test);
+
+                var startPts = new List<int>();
+                var endPts = new List<int>();
+
+                var pos = 0;
+                Func<char?> peek = () =>
+                {
+                    for (var n = pos; n < src.Length; n++)
+                    {
+                        if (!Char.IsWhiteSpace(src[n]))
+                        {
+                            return src[n];
+                        }
+                    }
+                    return null;
+                };
+
+                Func<char?> advance = () =>
+                {
+                    for (; pos < src.Length; pos++)
+                    {
+                        if (!Char.IsWhiteSpace(src[pos]))
+                        {
+                            return src[pos++];
+                        }
+                    }
+
+                    return null;
+                };
+
+                var state = 0;
+
+                while (pos < src.Length)
+                {
+                    var s = advance();
+
+                    switch (state)
+                    {
+                        case 0:
+                            if (s == '@')
+                            {
+                                if (peek() == '"')
+                                {
+                                    advance();
+                                    startPts.Add(pos);
+                                }
+                                state = 1;
+                            }
+                            break;
+                        case 1:
+                            if (s == '"')
+                            {
+                                var n = peek();
+                                if (n == '"') // inner quote
+                                {
+                                    advance();
+                                    break;
+                                }
+                                else
+                                {
+                                    endPts.Add(pos);
+                                    state = 0;
+                                }
+                            }
+
+                            break;
+                    }
+                }
+
+                for (var i = 0; i < endPts.Count; i++)
+                {
+                    var start = startPts[i];
+                    var end = endPts[i];
+                    // Console.WriteLine("TEST ======================================================");
+                    var code = src.Substring(start, end - start - 1).Replace("\"\"", "\"");
+                    // Console.WriteLine(code);
+                    // Console.WriteLine("== AFTER");
+                    try
+                    {
+                        // convert all deprecated list types to the new syntax
+                        var cb = ParserUtils.ParseWithDeprecatedListSyntax(code);
+
+                        var nodes = ParserUtils.FindExprListNodes(cb);
+
+                        var codeList = code.ToCharArray();
+
+                        foreach (var n in nodes)
+                        {
+                            // ignore nodes not part of original code
+                            if (n.charPos < 0 || n.charPos >= codeList.Length ||
+                                n.endCharPos < 0 || n.endCharPos >= codeList.Length)
+                            {
+                                continue;
+                            }
+
+                            codeList[n.charPos] = '[';
+                            codeList[n.endCharPos - 1] = ']';
+                        }
+
+                        // Console.WriteLine(code);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(code);
+                        Console.WriteLine("====");
+                        Console.WriteLine(e.StackTrace);
+                    }
+                }
+            }
+
+
+
+
+
+            /*
             AppDomain.CurrentDomain.AssemblyResolve += ResolveAssembly;
 
             //Display a message box and exit the program if Dynamo Core is unresolved.
@@ -24,7 +165,7 @@ namespace DynamoSandbox
 
             var setup = new DynamoCoreSetup(args);
             var app = new Application();
-            setup.RunApplication(app);
+            setup.RunApplication(app);*/
         }
 
         /// <summary>
