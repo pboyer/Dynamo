@@ -97,7 +97,6 @@ namespace DynamoSandbox
                                 if (n == '"') // inner quote
                                 {
                                     Advance();
-                                    break;
                                 }
                                 else
                                 {
@@ -140,7 +139,6 @@ namespace DynamoSandbox
                         }
 
                         finalCodes.Add(new String(codeList));
-                        //finalCodes.Add(code);
                     }
                     catch (Exception e)
                     {
