@@ -34,9 +34,9 @@ namespace DynamoSandbox
         [STAThread]
         public static void Main(string[] args)
         {
-            var prefix = @"C:\Users\boyerp\Dynamo\test\Engine";
+            var prefix = @"C:\Users\boyerp\Dynamo2\test\Engine";
 
-            foreach (var test in DirSearch(prefix))
+            foreach (var test in DirSearch(prefix)) 
             {
                 System.Console.WriteLine(test);
                 var src = File.ReadAllText(test);
@@ -140,8 +140,8 @@ namespace DynamoSandbox
                             codeList[n.endCharPos - 1] = ']';
                         }
 
-                    //    finalCodes.Add(new String(codeList));
-                        finalCodes.Add(code);
+                        finalCodes.Add(new String(codeList));
+                        //finalCodes.Add(code);
                     }
                     catch (Exception e)
                     {
