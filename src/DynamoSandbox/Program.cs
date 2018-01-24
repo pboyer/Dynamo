@@ -175,7 +175,7 @@ namespace DynamoSandbox
                         var oldCodeLen = end - start;
                         if (finalCode2.Length + 1 != oldCodeLen)
                         {
-                            Console.WriteLine("fail");
+                            Console.WriteLine("FAIL");
                             Console.WriteLine(finalCode2);
                             Console.WriteLine(new String(srcArray.Skip(startPts[i]).Take(oldCodeLen).ToArray()));
                             return;
