@@ -45,7 +45,8 @@ namespace DynamoSandbox
                 var endPts = new List<int>();
 
                 var pos = 0;
-                Func<char?> peek = () =>
+
+                char? Peek()
                 {
                     for (var n = pos; n < src.Length; n++)
                     {
@@ -54,10 +55,11 @@ namespace DynamoSandbox
                             return src[n];
                         }
                     }
-                    return null;
-                };
 
-                Func<char?> advance = () =>
+                    return null;
+                }
+
+                char? Advance()
                 {
                     for (; pos < src.Length; pos++)
                     {
@@ -68,22 +70,22 @@ namespace DynamoSandbox
                     }
 
                     return null;
-                };
+                }
 
                 var state = 0;
 
                 while (pos < src.Length)
                 {
-                    var s = advance();
+                    var s = Advance();
 
                     switch (state)
                     {
                         case 0:
                             if (s == '@')
                             {
-                                if (peek() == '"')
+                                if (Peek() == '"')
                                 {
-                                    advance();
+                                    Advance();
                                     startPts.Add(pos);
                                 }
                                 state = 1;
@@ -92,10 +94,10 @@ namespace DynamoSandbox
                         case 1:
                             if (s == '"')
                             {
-                                var n = peek();
+                                var n = Peek();
                                 if (n == '"') // inner quote
                                 {
-                                    advance();
+                                    Advance();
                                     break;
                                 }
                                 else
@@ -115,13 +117,14 @@ namespace DynamoSandbox
                     var end = endPts[i];
                     // Console.WriteLine("TEST ======================================================");
                     var code = src.Substring(start, end - start - 1).Replace("\"\"", "\"");
+                    string finalCode;
                     // Console.WriteLine(code);
                     // Console.WriteLine("== AFTER");
                     try
                     {
                         // convert all deprecated list types to the new syntax
                         var cb = ParserUtils.ParseWithDeprecatedListSyntax(code);
-
+                        /*
                         var nodes = ParserUtils.FindExprListNodes(cb);
 
                         var codeList = code.ToCharArray();
@@ -137,14 +140,14 @@ namespace DynamoSandbox
 
                             codeList[n.charPos] = '[';
                             codeList[n.endCharPos - 1] = ']';
-                        }
-
-                        // Console.WriteLine(code);
+                        }*/
                     }
                     catch (Exception e)
                     {
+                        Console.WriteLine("Code that failed:");
                         Console.WriteLine(code);
-                        Console.WriteLine("====");
+                 
+                        Console.WriteLine("Stack trace:");
                         Console.WriteLine(e.StackTrace);
                     }
                 }
