@@ -111,20 +111,18 @@ namespace DynamoSandbox
                     }
                 }
 
+                var finalCodes = new List<string>();
+
                 for (var i = 0; i < endPts.Count; i++)
                 {
                     var start = startPts[i];
                     var end = endPts[i];
-                    // Console.WriteLine("TEST ======================================================");
                     var code = src.Substring(start, end - start - 1).Replace("\"\"", "\"");
-                    string finalCode;
-                    // Console.WriteLine(code);
-                    // Console.WriteLine("== AFTER");
                     try
                     {
                         // convert all deprecated list types to the new syntax
                         var cb = ParserUtils.ParseWithDeprecatedListSyntax(code);
-                        /*
+                        
                         var nodes = ParserUtils.FindExprListNodes(cb);
 
                         var codeList = code.ToCharArray();
@@ -140,7 +138,10 @@ namespace DynamoSandbox
 
                             codeList[n.charPos] = '[';
                             codeList[n.endCharPos - 1] = ']';
-                        }*/
+                        }
+
+                    //    finalCodes.Add(new String(codeList));
+                        finalCodes.Add(code);
                     }
                     catch (Exception e)
                     {
@@ -149,8 +150,53 @@ namespace DynamoSandbox
                  
                         Console.WriteLine("Stack trace:");
                         Console.WriteLine(e.StackTrace);
+
+                        finalCodes.Add(null);
                     }
                 }
+
+                Console.WriteLine("FinalCodes: {0}, EndPts.Count: {1}", finalCodes.Count, endPts.Count);
+
+                {
+                    var srcArray = src.ToCharArray();
+
+                    var i = 0;
+                    foreach (var finalCode in finalCodes)
+                    {
+                        if (finalCode == null)
+                        {
+                            i++;
+                            continue;
+                        }
+                        var finalCode2 = finalCode.Replace("\"", "\"\"");
+                         
+                        var start = startPts[i];
+                        var end = endPts[i];
+                        var oldCodeLen = end - start;
+                        if (finalCode2.Length + 1 != oldCodeLen)
+                        {
+                            Console.WriteLine("fail");
+                            Console.WriteLine(finalCode2);
+                            Console.WriteLine(new String(srcArray.Skip(startPts[i]).Take(oldCodeLen).ToArray()));
+                            return;
+                        }
+
+                        Console.WriteLine("NewCodeLength: {0}, OldCodeLength: {1}", finalCode2.Length, oldCodeLen);
+
+                        for (var j = 0; j < finalCode2.Length; j++)
+                        {
+                            srcArray[start + j] = finalCode2[j];
+                        }
+
+                        i++;
+                    }
+                    
+                    var finalResult = new String(srcArray);
+
+                    Console.WriteLine(finalResult);
+                }
+
+     
             }
 
 
