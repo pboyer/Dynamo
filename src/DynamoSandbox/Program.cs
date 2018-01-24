@@ -25,9 +25,8 @@ namespace DynamoSandbox
 
             foreach (string f in Directory.GetFiles(dir))
             {
-                // if (f.EndsWith(".cs"))
-                if (f.EndsWith("MicroFeatureTests.cs"))
-                        yield return f;
+                if (f.EndsWith(".cs"))
+                    yield return f;
             }
         }
 
@@ -194,6 +193,8 @@ namespace DynamoSandbox
                     var finalResult = new String(srcArray);
 
                     Console.WriteLine(finalResult);
+
+                    File.WriteAllText(test, finalResult);
                 }
 
      
