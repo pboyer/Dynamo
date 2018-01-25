@@ -4,8 +4,6 @@ using System.Reflection;
 using System.IO;
 using System.Linq;
 using System.Diagnostics;
-using System.Collections.Generic;
-using ProtoCore.Utils;
 
 namespace DynamoSandbox
 {
@@ -13,211 +11,9 @@ namespace DynamoSandbox
     {
         private static string dynamopath;
 
-        static IEnumerable<string> DirSearch(string dir)
-        {
-            foreach (string d in Directory.GetDirectories(dir))
-            {
-                foreach (var ff in DirSearch(d))
-                {
-                    yield return ff;
-                }
-            }
-
-            foreach (string f in Directory.GetFiles(dir))
-            {
-                if (f.EndsWith(".cs"))
-                    yield return f;
-            }
-        }
-
         [STAThread]
         public static void Main(string[] args)
-        {
-            var prefix = @"C:\Users\boyerp\Dynamo2\test\Engine";
-
-            foreach (var test in DirSearch(prefix)) 
-            {
-                System.Console.WriteLine(test);
-                var src = File.ReadAllText(test);
-
-                var startPts = new List<int>();
-                var endPts = new List<int>();
-
-                var pos = 0;
-
-                char? Peek()
-                {
-                    for (var n = pos; n < src.Length; n++)
-                    {
-                        if (!Char.IsWhiteSpace(src[n]))
-                        {
-                            return src[n];
-                        }
-                    }
-
-                    return null;
-                }
-
-                char? Advance()
-                {
-                    for (; pos < src.Length; pos++)
-                    {
-                        if (!Char.IsWhiteSpace(src[pos]))
-                        {
-                            return src[pos++];
-                        }
-                    }
-
-                    return null;
-                }
-
-                var state = 0;
-
-                while (pos < src.Length)
-                {
-                    var s = Advance();
-
-                    switch (state)
-                    {
-                        case 0:
-                            if (s == '@')
-                            {
-                                if (Peek() == '"')
-                                {
-                                    Advance();
-                                    startPts.Add(pos);
-                                    state = 1;
-                                }
-                            }
-                            break;
-                        case 1:
-                            if (s == '"')
-                            {
-                                var n = Peek();
-                                if (n == '"') // inner quote
-                                {
-                                    Advance();
-                                }
-                                else
-                                {
-                                    endPts.Add(pos);
-                                    state = 0;
-                                }
-                            }
-
-                            break;
-                    }
-                }
-
-                if (state == 1)
-                {
-                    Console.WriteLine("FAIL {0}", test);
-                    return;
-                }
-
-                var finalCodes = new List<string>();
-
-                for (var i = 0; i < endPts.Count; i++)
-                {
-                    var start = startPts[i];
-                    var end = endPts[i];
-
-                    if (start > end)
-                    {
-                        Console.WriteLine("FAIL");
-                        Console.WriteLine("start: {0}, end: {1}", start, end);
-                        Console.WriteLine(src.Substring(start, 20));
-                        Console.WriteLine(test);
-                        return;
-                    }
-                    var code = src.Substring(start, end - start - 1).Replace("\"\"", "\"");
-                    try
-                    {
-                        // convert all deprecated list types to the new syntax
-                        var cb = ParserUtils.ParseWithDeprecatedListSyntax(code);
-                        
-                        var nodes = ParserUtils.FindExprListNodes(cb);
-
-                        var codeList = code.ToCharArray();
-
-                        foreach (var n in nodes)
-                        {
-                            // ignore nodes not part of original code
-                            if (n.charPos < 0 || n.charPos >= codeList.Length ||
-                                n.endCharPos < 0 || n.endCharPos >= codeList.Length)
-                            {
-                                continue;
-                            }
-
-                            codeList[n.charPos] = '[';
-                            codeList[n.endCharPos - 1] = ']';
-                        }
-
-                        finalCodes.Add(new String(codeList));
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("Code that failed:");
-                        Console.WriteLine(code);
-                 
-                        Console.WriteLine("Stack trace:");
-                        Console.WriteLine(e.StackTrace);
-
-                        finalCodes.Add(null);
-                    }
-                }
-
-                Console.WriteLine("FinalCodes: {0}, EndPts.Count: {1}", finalCodes.Count, endPts.Count);
-
-                {
-                    var srcArray = src.ToCharArray();
-
-                    var i = 0;
-                    foreach (var finalCode in finalCodes)
-                    {
-                        if (finalCode == null)
-                        {
-                            i++;
-                            continue;
-                        }
-                        var finalCode2 = finalCode.Replace("\"", "\"\"");
-                         
-                        var start = startPts[i];
-                        var end = endPts[i];
-                        var oldCodeLen = end - start;
-                        if (finalCode2.Length + 1 != oldCodeLen)
-                        {
-                            Console.WriteLine("FAIL");
-                            Console.WriteLine(finalCode2);
-                            Console.WriteLine(new String(srcArray.Skip(startPts[i]).Take(oldCodeLen).ToArray()));
-                            return;
-                        }
-
-                        Console.WriteLine("NewCodeLength: {0}, OldCodeLength: {1}", finalCode2.Length, oldCodeLen);
-
-                        for (var j = 0; j < finalCode2.Length; j++)
-                        {
-                            srcArray[start + j] = finalCode2[j];
-                        }
-
-                        i++;
-                    }
-                    
-                    var finalResult = new String(srcArray);
-
-                    Console.WriteLine(finalResult);
-
-                    File.WriteAllText(test, finalResult);
-                }
-
-     
-            }
-
-
-
-
-
-            /*
+        {   
             AppDomain.CurrentDomain.AssemblyResolve += ResolveAssembly;
 
             //Display a message box and exit the program if Dynamo Core is unresolved.
@@ -228,7 +24,7 @@ namespace DynamoSandbox
 
             var setup = new DynamoCoreSetup(args);
             var app = new Application();
-            setup.RunApplication(app);*/
+            setup.RunApplication(app);
         }
 
         /// <summary>
