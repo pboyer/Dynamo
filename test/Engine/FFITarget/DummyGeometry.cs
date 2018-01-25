@@ -1,4 +1,4 @@
-﻿using Autodesk.DesignScript.Runtime;
+using Autodesk.DesignScript.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;

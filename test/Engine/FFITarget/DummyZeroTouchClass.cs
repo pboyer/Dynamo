@@ -1,4 +1,4 @@
-﻿using Dynamo.Graph.Nodes;
+using Dynamo.Graph.Nodes;
 using Dynamo.Models;
 
 namespace FFITarget
