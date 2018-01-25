@@ -126,7 +126,7 @@ COMPILER DesignScriptParser
                 case 1:
                     if (pt.val == "Associative" || pt.val == "Imperative")
                     {
-					    scanner.ResetPeek();
+                        scanner.ResetPeek();
                         return true;
                     }
                     goto fail;
