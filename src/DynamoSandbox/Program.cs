@@ -86,8 +86,8 @@ namespace DynamoSandbox
                                 {
                                     Advance();
                                     startPts.Add(pos);
+                                    state = 1;
                                 }
-                                state = 1;
                             }
                             break;
                         case 1:
@@ -109,12 +109,27 @@ namespace DynamoSandbox
                     }
                 }
 
+                if (state == 1)
+                {
+                    Console.WriteLine("FAIL {0}", test);
+                    return;
+                }
+
                 var finalCodes = new List<string>();
 
                 for (var i = 0; i < endPts.Count; i++)
                 {
                     var start = startPts[i];
                     var end = endPts[i];
+
+                    if (start > end)
+                    {
+                        Console.WriteLine("FAIL");
+                        Console.WriteLine("start: {0}, end: {1}", start, end);
+                        Console.WriteLine(src.Substring(start, 20));
+                        Console.WriteLine(test);
+                        return;
+                    }
                     var code = src.Substring(start, end - start - 1).Replace("\"\"", "\"");
                     try
                     {
