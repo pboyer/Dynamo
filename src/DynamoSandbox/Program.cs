@@ -115,6 +115,8 @@ namespace DynamoSandbox
                     return;
                 }
 
+                if (endPts.Count == 0) continue;
+
                 var finalCodes = new List<string>();
 
                 for (var i = 0; i < endPts.Count; i++)
@@ -166,6 +168,7 @@ namespace DynamoSandbox
                         finalCodes.Add(null);
                     }
                 }
+
 
                 Console.WriteLine("FinalCodes: {0}, EndPts.Count: {1}", finalCodes.Count, endPts.Count);
 
